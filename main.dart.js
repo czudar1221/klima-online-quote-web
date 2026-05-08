@@ -117951,7 +117951,7 @@ case 2:p=b
 if(p!=null)q.N(new A.aDE(q,p))
 return A.u(null,r)}})
 return A.v($async$GN,r)},
-L(a){var s,r,q,p,o=this,n=null,m=A.er(n,!0,n,B.b7f),l=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.d,n,n,n,n,n,2,B.a2j,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,o.gakM(),!1,n,n,!0,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n),k=t.p,j=A.b2(A.b([B.b87,B.cb,A.cd(A.b([o.Me("F\xe9l \xe9ves"),B.cY,o.Me("\xc9ves"),B.cY,o.Me("2 \xe9ves")],k),B.U,B.K,B.Q,0,n)],k),B.ap,B.K,B.Q),i=t.N,h=A.mv(B.a2d,B.FD,new A.aDH(o),n,o.Q,i),g=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.e,n,n,n,n,n,2,B.a21,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,n,!1,n,n,!1,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n)
+L(a){var s,r,q,p,o=this,n=null,m=A.er(n,!0,n,B.b7e),l=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.d,n,n,n,n,n,2,B.a2j,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,o.gakM(),!1,n,n,!0,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n),k=t.p,j=A.b2(A.b([B.b87,B.cb,A.cd(A.b([o.Me("F\xe9l \xe9ves"),B.cY,o.Me("\xc9ves"),B.cY,o.Me("2 \xe9ves")],k),B.U,B.K,B.Q,0,n)],k),B.ap,B.K,B.Q),i=t.N,h=A.mv(B.a2d,B.FD,new A.aDH(o),n,o.Q,i),g=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.e,n,n,n,n,n,2,B.a21,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,n,!1,n,n,!1,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n)
 i=A.mv(B.a2c,B.G9,new A.aDI(o),n,o.x,i)
 s=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.f,n,n,n,n,n,2,B.a2x,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,n,!1,n,n,!1,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n)
 r=A.ci(n,B.am,!1,n,!0,B.F,n,A.cr(),o.r,n,n,n,n,n,2,B.a2q,B.R,!0,n,!0,n,!1,n,B.an,n,n,n,n,n,n,n,n,1,n,n,!1,"\u2022",n,n,n,n,n,!1,n,n,!1,n,!0,n,B.aq,n,n,n,n,n,n,n,n,n,n,n,n,!0,B.a8,n,B.as,n,n,n,n)
@@ -118943,7 +118943,7 @@ mt(a,b,c,d){var s=null
 return A.a0a(A.f9(!1,B.al,!0,s,A.io(!1,A.ar(10),!0,A.aX(B.ah,A.dJ(b,a,s,22),B.L,s,s,s,s,38,s,s,s,s,38),s,!0,s,s,s,s,s,s,s,s,s,s,c,s,s,s,s,s,s,s),B.L,B.ad,0,s,s,s,s,s,B.dk),d)},
 oo(a,b){var s=null
 return new A.aB(B.lJ,A.cd(A.b([A.dJ(a,B.ln,s,16),B.cY,A.cH(A.Q(b,s,s,s,B.Re,s,s,s),1)],t.p),B.U,B.K,B.Q,0,s),s)},
-L(a){var s,r=this,q=null,p=r.gapT(),o=t.p,n=A.er(A.b([A.dA(q,!1,q,q,q,q,q,q,q,q,B.a1n,q,q,q,q,new A.aIi(r,a),q,q,q,q,q,"Kiemelt partnerek",q),new A.Au(new A.aIj(),new A.aIk(a),B.a1q,q,t.iX)],o),!0,!0,B.b74),m=A.b2(A.b([A.G8(new A.aB(B.a_f,A.b3a("assets/icons/wrench_plus.png",B.B,B.pW,q,q),q),"quickMaintenanceFab",new A.aIl(r,a),"Karbantart\xe1s hozz\xe1ad\xe1sa"),B.a2,A.G8(B.hH,"addClientFab",r.gax0(),"\xdaj \xfcgyf\xe9l")],o),B.U,B.K,B.bi)
+L(a){var s,r=this,q=null,p=r.gapT(),o=t.p,n=A.er(A.b([A.dA(q,!1,q,q,q,q,q,q,q,q,B.a1n,q,q,q,q,new A.aIi(r,a),q,q,q,q,q,"Kiemelt partnerek",q),new A.Au(new A.aIj(),new A.aIk(a),B.a1q,q,t.iX)],o),!0,!0,B.b73),m=A.b2(A.b([A.G8(new A.aB(B.a_f,A.b3a("assets/icons/wrench_plus.png",B.B,B.pW,q,q),q),"quickMaintenanceFab",new A.aIl(r,a),"Karbantart\xe1s hozz\xe1ad\xe1sa"),B.a2,A.G8(B.hH,"addClientFab",r.gax0(),"\xdaj \xfcgyf\xe9l")],o),B.U,B.K,B.bi)
 if(r.e)o=B.cE
 else{s=r.r.length!==0?A.dA(q,!1,q,q,q,q,q,q,q,q,B.rJ,q,q,q,q,new A.aIm(r),q,q,q,q,q,q,q):q
 o=A.b([new A.aB(B.qK,A.ci(q,B.am,!1,q,!0,B.F,q,A.cr(),r.f,q,q,q,q,q,2,A.cz(q,new A.bX(4,A.ar(14),B.aF),q,q,q,q,q,q,!0,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,q,u.o,q,q,q,q,q,q,q,q,q,!0,!0,!1,q,B.dz,q,q,q,q,q,q,s,q,q,q,q,q),B.R,!0,q,!0,q,!1,q,B.an,q,q,q,q,q,q,q,q,1,q,q,!1,"\u2022",q,new A.aIn(r),q,q,q,!1,q,q,!1,q,!0,q,B.aq,q,q,q,q,q,q,q,q,q,q,q,q,!0,B.a8,q,B.as,q,q,q,q),q)],o)
@@ -119839,12 +119839,12 @@ r=A.P(p,t.cT)
 B.m.eR(r,new A.aGQ(m))
 o=m.y?r:A.fy(r,0,A.k5(5,"count",t.S),A.X(r).c).ee(0)
 r=t.p
-q=A.cd(A.b([A.Q("K\xe9sz\xfcl\xe9kek: "+m.e.length,l,l,l,B.kG,l,l,l),B.kA,A.b5I(B.hH,B.b6M,m.gaku())],r),B.U,B.K,B.Q,0,l)
+q=A.cd(A.b([A.Q("K\xe9sz\xfcl\xe9kek: "+m.e.length,l,l,l,B.kG,l,l,l),B.kA,A.b5I(B.hH,B.b6L,m.gaku())],r),B.U,B.K,B.Q,0,l)
 n=m.x.length!==0?A.dA(l,!1,l,l,l,l,l,l,l,l,B.rJ,l,l,l,l,new A.aGR(m),l,l,l,l,l,l,l):l
 n=A.b([q,B.e1,A.ci(l,B.am,!1,l,!0,B.F,l,A.cr(),m.w,l,l,l,l,l,2,A.cz(l,new A.bX(4,A.ar(14),B.aF),l,l,l,l,l,l,!0,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,l,"Keres\xe9s k\xe9sz\xfcl\xe9k, gy\xe1rt\xf3, modell alapj\xe1n...",l,l,l,l,l,l,l,l,l,!0,!0,!1,l,B.dz,l,l,l,l,l,l,n,l,l,l,l,l),B.R,!0,l,!0,l,!1,l,B.an,l,l,l,l,l,l,l,l,1,l,l,!1,"\u2022",l,new A.aGS(m),l,l,l,!1,l,l,!1,l,!0,l,B.aq,l,l,l,l,l,l,l,l,l,l,l,l,!0,B.a8,l,B.as,l,l,l,l),B.a2,A.bV(A.Hf(A.b([m.zf("\xd6sszes","all"),m.zf("Garanci\xe1lis","warranty"),m.zf("Nem garanci\xe1lis","no_warranty"),m.zf("Karbantartva","maintained"),m.zf("Nincs karbantartva","not_maintained")],r),l,l,l,B.bt,!1),42,l),B.a2],r)
 if(p.length===0){r=A.a6(13,B.B.p()>>>16&255,B.B.p()>>>8&255,B.B.p()&255)
 q=A.ar(14)
-n.push(A.aX(l,B.b71,B.L,l,l,new A.c0(r,l,A.ef(A.a6(20,B.B.p()>>>16&255,B.B.p()>>>8&255,B.B.p()&255),1),q,l,l,B.at),l,l,l,B.b0,l,l,1/0))}else{q=A.P(new A.a2(o,new A.aGT(m),A.X(o).i("a2<1,e>")),t.l7)
+n.push(A.aX(l,B.b70,B.L,l,l,new A.c0(r,l,A.ef(A.a6(20,B.B.p()>>>16&255,B.B.p()>>>8&255,B.B.p()&255),1),q,l,l,B.at),l,l,l,B.b0,l,l,1/0))}else{q=A.P(new A.a2(o,new A.aGT(m),A.X(o).i("a2<1,e>")),t.l7)
 if(!m.y&&p.length>5)B.m.T(q,A.b([B.ci,A.bV(A.b5I(B.a12,A.Q("T\xf6bb... ("+(p.length-5)+" tov\xe1bbi k\xe9sz\xfcl\xe9k)",l,l,l,l,l,l,l),new A.aGU(m)),l,1/0)],r))
 n.push(A.b2(q,B.U,B.K,B.Q))}return A.b2(n,B.ap,B.K,B.Q)},
 alM(a){var s=null,r=a.d
@@ -119995,7 +119995,7 @@ p=t.w
 o=A.bZ(a,e,p).w
 o=A.bV(A.b2B(B.xR,10,B.B,"quote_btn",B.a1m,B.b7o,new A.aHz(f,a)),e,o.a.a*0.92)
 p=A.bZ(a,e,p).w
-p=A.b2(A.b([o,B.a2,A.bV(A.b2B(B.xR,10,B.B,"history_btn",B.a1i,B.b6R,new A.aHA(f,a)),e,p.a.a*0.92)],d),B.U,B.K,B.bi)
+p=A.b2(A.b([o,B.a2,A.bV(A.b2B(B.xR,10,B.B,"history_btn",B.a1i,B.b6Q,new A.aHA(f,a)),e,p.a.a*0.92)],d),B.U,B.K,B.bi)
 o=A.Q(f.d.b,e,e,e,B.vm,e,e,e)
 n=s.KJ(0.18)
 m=A.ar(12)
@@ -120035,7 +120035,7 @@ m=q.a
 s=new A.aL(new A.cv(m,B.bT,B.b6),$.ad())
 s.suZ(A.pf(new A.ax(m.length,B.O)))
 m=t.p
-s=A.b([p,B.a2,A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s,r,r,r,r,r,2,B.a1Z,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,3,r,r,!1,"\u2022",r,new A.aH1(q),r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),B.aV,A.b5B(B.b_,new A.aH2(q,b),r,B.b7d,q.e)],m)
+s=A.b([p,B.a2,A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s,r,r,r,r,r,2,B.a1Z,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,3,r,r,!1,"\u2022",r,new A.aH1(q),r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),B.aV,A.b5B(B.b_,new A.aH2(q,b),r,B.b7c,q.e)],m)
 if(q.e){p=q.d
 o=A.P(new A.a2(B.t9,new A.aH3(),o),n)
 n=this.b
@@ -120090,7 +120090,7 @@ $0(){this.a.d=A.EN(this.b)},
 $S:0}
 A.aHd.prototype={
 $1(a){var s=null,r=A.Q("Biztosan t\xf6r\xf6lni szeretn\xe9d ezt az \xfcgyfelet?\n\n"+this.a.b,s,s,s,s,s,s,s)
-return A.DO(A.b([A.rG(B.oK,new A.aHb(a),s),A.rG(B.b6Y,new A.aHc(a),s)],t.p),s,s,s,s,s,s,s,s,s,r,s,s,s,s,s,s,s,B.b75)},
+return A.DO(A.b([A.rG(B.oK,new A.aHb(a),s),A.rG(B.b6X,new A.aHc(a),s)],t.p),s,s,s,s,s,s,s,s,s,r,s,s,s,s,s,s,s,B.b74)},
 $S:140}
 A.aHb.prototype={
 $0(){A.ba(this.a,!1).dA(!1)
@@ -120454,7 +120454,7 @@ else{q=q.c
 q===$&&A.a()
 s=q}if(s==null){q=this.a.c
 s=q==null?r:q.d}if(s==null||s.length===0){q=A.ar(12)
-return A.aX(r,B.VR,B.L,r,r,new A.c0(B.e8,r,A.ef(B.eE,1),q,r,r,B.at),r,180,r,r,r,r,1/0)}return A.eQ(A.ar(12),A.eT(s,new A.aCx(),B.bj,180,r,1/0),B.aZ)},
+return A.aX(r,B.VS,B.L,r,r,new A.c0(B.e8,r,A.ef(B.eE,1),q,r,r,B.at),r,180,r,r,r,r,1/0)}return A.eQ(A.ar(12),A.eT(s,new A.aCx(),B.bj,180,r,1/0),B.aZ)},
 m(){var s=this,r=s.e,q=r.S$=$.ad()
 r.J$=0
 r=s.f
@@ -120549,7 +120549,7 @@ s.push(A.di(!1,p.e,A.cz(o,new A.bX(4,A.ar(12),B.aF),o,o,o,o,o,o,!0,o,o,o,o,o,o,o
 s.push(B.aV)
 s.push(p.alK())
 s.push(B.aV)
-s.push(A.bV(A.u9(B.hG,B.b7g,p.gaAm()),o,1/0))
+s.push(A.bV(A.u9(B.hG,B.b7f,p.gaAm()),o,1/0))
 s.push(B.a2)
 s.push(A.bV(A.X7(B.a1s,B.vs,p.gaAl()),o,1/0))
 s.push(B.dE)
@@ -120787,7 +120787,7 @@ a0=A.b([a2,B.aV,a3,B.cb,s,B.ik,r,a4,q,p,o,n,m,l,k,j,i,h,g,f,e,d,b.fI("Megjegyz\x
 if(b.e)a0.push(B.q3)
 else if(b.d.length===0)a0.push(B.b8o)
 a0.push(B.e1)
-a0.push(A.bV(A.X7(B.a1u,B.b79,new A.aJN(b,a5)),52,1/0))
+a0.push(A.bV(A.X7(B.a1u,B.b78,new A.aJN(b,a5)),52,1/0))
 a0.push(B.e1)
 a0.push(A.bV(A.u9(B.rI,B.b6B,new A.aJO(b,a5)),52,1/0))
 return A.ev(a1,A.b4Y(A.iu(A.b2(a0,B.ap,B.K,B.Q),B.F,a,B.R,B.av,a,B.b0,B.iE,a,!1,B.aj),b.gawU()),a)}}
@@ -121332,7 +121332,7 @@ r=k.x
 s.push(A.Q("H\u0171t\u0151 teljes\xedtm\xe9ny: "+(r==null?"-":r),l,l,l,l,l,l,l))
 r=k.y
 s.push(A.Q("F\u0171t\u0151 teljes\xedtm\xe9ny: "+(r==null?"-":r),l,l,l,l,l,l,l))
-B.m.T(o,A.b([B.a2,A.et(new A.aB(B.eH,A.b2(s,B.U,B.K,B.Q),l),l,l,l),B.e1,A.bV(A.u9(B.a1h,B.b7e,m.gakC()),l,1/0)],n))}o.push(B.aV)
+B.m.T(o,A.b([B.a2,A.et(new A.aB(B.eH,A.b2(s,B.U,B.K,B.Q),l),l,l,l),B.e1,A.bV(A.u9(B.a1h,B.b7d,m.gakC()),l,1/0)],n))}o.push(B.aV)
 o.push(m.alL())
 o.push(B.aV)
 o.push(A.bV(A.X7(B.hG,B.b7L,m.gaAr()),l,1/0))
@@ -121457,7 +121457,7 @@ $0(){this.a.Q=this.b},
 $S:0}
 A.aPy.prototype={
 $3(a,b,c){var s=null
-return A.aX(s,B.VO,B.L,B.e8,s,s,s,170,s,s,s,s,1/0)},
+return A.aX(s,B.VP,B.L,B.e8,s,s,s,170,s,s,s,s,1/0)},
 $S:15}
 A.aPz.prototype={
 $1(a){return this.a.N(new A.aPq())},
@@ -121650,7 +121650,7 @@ c=d.e
 d=B.p.af(d.c.e)
 b=t.s
 d=d.length===0?A.b([],b):A.b([d],b)
-h=new A.U3(c,d,"Tisztelt "+f.b+",\n\nAz online \xe1raj\xe1nlat az al\xe1bbi linken \xe9rhet\u0151 el:\n\n"+e+"\n\nA linken meg tudja tekinteni az aj\xe1nlott k\xe9sz\xfcl\xe9keket \xe9s kiv\xe1laszthatja a megfelel\u0151t.\n\n\xdcdv\xf6zlettel,\nV\xe9ber Cool",null,!1)
+h=new A.U3(c,d,"Tisztelt "+f.b+",\n\nAz \xe1raj\xe1nlat az al\xe1bbi linken \xe9rhet\u0151 el:\n\n"+e+"\n\nA linken meg tudja tekinteni az aj\xe1nlott k\xe9sz\xfcl\xe9keket \xe9s kiv\xe1laszthatja a megfelel\u0151t.\n\n\xdcdv\xf6zlettel,\nV\xe9ber Cool Kft.",null,!1)
 s=12
 return A.k(B.Lj.fp("send",h.fm(),!1,t.H),$async$vy)
 case 12:f=n.c
@@ -121879,7 +121879,7 @@ A.tD.prototype={
 ai(){return new A.a1q()}}
 A.a1q.prototype={
 L(a){var s=null
-return A.ev(A.er(s,!0,s,B.b78),new A.HB(new A.aFx(this,a),s),s)}}
+return A.ev(A.er(s,!0,s,B.b77),new A.HB(new A.aFx(this,a),s),s)}}
 A.aFx.prototype={
 $1(a){var s,r=this.a
 if(r.d)return
@@ -122293,7 +122293,7 @@ i=d?"Kiv\xe1lasztva":"Koppints a kiv\xe1laszt\xe1shoz"
 h=t.p
 return A.fH(f,A.et(new A.aB(B.eH,A.cd(A.b([o,B.e0,A.cH(A.b2(A.b([n,B.cb,m,l,k,B.Z8,j,B.cb,A.Q(i,f,f,f,A.cL(f,f,d?B.hU:B.qj,f,f,f,f,f,f,f,f,12,f,f,f,f,f,!0,f,f,f,f,f,f,f,f),f,f,f)],h),B.ap,B.K,B.Q),1)],h),B.ap,B.K,B.Q,0,f),f),c,B.qH,new A.dL(q,new A.bc(p,1.5,B.ae,-1))),B.R,!1,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,f,new A.aNL(g,e),f,f,f,f,f,f,!1,B.bR)},
 L(a){var s,r,q,p,o,n,m,l=this,k=null,j="public_note",i="Teljes k\xf6r\u0171 online \xfcgyint\xe9z\xe9s.",h="Karbantart\xe1si eml\xe9keztet\u0151 emailben vagy SMS-ben.",g=l.f,f=J.d(g==null?k:g.h(0,"status"),"accepted")
-g=A.er(k,!1,!0,B.b6X)
+g=A.er(k,!1,!0,B.b6W)
 if(l.d)s=B.cE
 else{r=l.f
 if(r==null)s=B.VV
@@ -122316,7 +122316,7 @@ o=A.Q("\xc9rv\xe9nyess\xe9g: "+A.i(o==null?"30 nap":o),k,k,k,k,k,k,k)
 n=r.h(0,"installation_price")
 n=A.Q("Alapszerel\xe9s: "+l.vJ(n==null?0:n),k,k,k,k,k,k,k)
 m=r.h(0,"extra_price")
-s=A.b([s,B.aV,A.et(new A.aB(B.yx,A.b2(A.b([B.b8a,B.a2,q,B.cb,o,B.cb,n,B.cb,A.Q("Extra / alpin: "+l.vJ(m==null?0:m),k,k,k,k,k,k,k)],p),B.ap,B.K,B.Q),k),k,B.fi,k),B.dE,B.VS,B.aV],p)
+s=A.b([s,B.aV,A.et(new A.aB(B.yx,A.b2(A.b([B.b8a,B.a2,q,B.cb,o,B.cb,n,B.cb,A.Q("Extra / alpin: "+l.vJ(m==null?0:m),k,k,k,k,k,k,k)],p),B.ap,B.K,B.Q),k),k,B.fi,k),B.dE,B.VO,B.aV],p)
 q=l.r
 B.m.T(s,new A.a2(q,l.gaAV(),A.X(q).i("a2<1,e>")))
 s.push(B.dE)
@@ -122410,7 +122410,7 @@ if(r%3===0&&s!==0)q+="."}return new A.cu(A.b((q.charCodeAt(0)==0?q:q).split(""),
 L(a){var s,r=null,q=A.er(r,!0,r,B.b7u)
 if(this.d)s=B.cE
 else{s=this.e.length
-s=s===0?B.VP:A.kp(!0,!0,!0,r,B.F,r,B.R,r,B.av,new A.aNP(this),s,r,r,r,B.b0,r,r,r,r,!1,B.aj,r,!1)}return A.ev(q,s,r)}}
+s=s===0?B.VQ:A.kp(!0,!0,!0,r,B.F,r,B.R,r,B.av,new A.aNP(this),s,r,r,r,B.b0,r,r,r,r,!1,B.aj,r,!1)}return A.ev(q,s,r)}}
 A.aNN.prototype={
 $0(){var s=this.a
 s.e=A.cK(this.b,!0,t.P)
@@ -122691,7 +122691,7 @@ return null},
 $S:0}
 A.aOT.prototype={
 $1(a){var s=this,r=null,q="\u2022",p=t.p,o=A.iu(A.b2(A.b([A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.a,r,r,r,r,r,2,B.zY,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.b,r,r,r,r,r,2,B.A_,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.c,r,r,r,r,r,2,B.A4,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.d,r,r,r,r,r,2,B.zW,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.e,r,r,r,r,r,2,B.zZ,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.f,r,r,r,r,r,2,B.zX,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.r,r,r,r,r,r,2,B.A2,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.w,r,r,r,r,r,2,B.A3,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.x,r,r,r,r,r,2,B.A1,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,B.kE,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r),A.ci(r,B.am,!1,r,!0,B.F,r,A.cr(),s.y,r,r,r,r,r,2,B.a2s,B.R,!0,r,!0,r,!1,r,B.an,r,r,r,r,r,r,r,r,1,r,r,!1,q,r,r,r,r,r,!1,r,r,!1,r,!0,r,B.aq,r,r,r,r,r,r,r,r,r,r,r,r,!0,B.a8,r,B.as,r,r,r,r)],p),B.U,B.K,B.Q),B.F,r,B.R,B.av,r,r,r,r,!1,B.aj)
-return A.DO(A.b([A.rG(B.oK,new A.aOR(a),r),A.mz(B.b7b,new A.aOS(a))],p),r,r,r,r,r,r,r,r,r,o,r,r,r,r,r,r,r,B.b7_)},
+return A.DO(A.b([A.rG(B.oK,new A.aOR(a),r),A.mz(B.b7a,new A.aOS(a))],p),r,r,r,r,r,r,r,r,r,o,r,r,r,r,r,r,r,B.b6Z)},
 $S:140}
 A.aOR.prototype={
 $0(){A.ba(this.a,!1).dA(!1)
@@ -122912,7 +122912,7 @@ return A.v($async$yY,r)},
 av(){this.aI()
 this.zT()},
 L(a){var s=null,r=A.er(s,!0,!0,B.Ri),q=A.G8(B.hH,B.la,this.gakE(),s),p=this.e.length
-p=p===0?B.VQ:A.kp(!0,!0,!0,s,B.F,s,B.R,s,B.av,new A.aSw(this),p,s,s,s,B.c8,s,s,s,s,!1,B.aj,s,!1)
+p=p===0?B.VR:A.kp(!0,!0,!0,s,B.F,s,B.R,s,B.av,new A.aSw(this),p,s,s,s,B.c8,s,s,s,s,!1,B.aj,s,!1)
 return A.ev(r,p,q)}}
 A.aSs.prototype={
 $0(){this.a.e=A.cK(this.b,!0,t.P)},
@@ -133884,26 +133884,26 @@ B.b7y=new A.ac("M\xe9g nincs kiv\xe1lasztott felm\xe9r\xe9si k\xe9p",null,null,n
 B.aVt=new A.aB(B.b0,B.b7y,null)
 B.bd9=new A.aGu(0,"elevated")
 B.VK=new A.q7(null,null,null,B.aVt,null)
-B.b6L=new A.ac("M\xe9g nincs hozz\xe1adott term\xe9k az aj\xe1nlathoz",null,null,null,null,null,null,null,null,null)
-B.aVv=new A.aB(B.b0,B.b6L,null)
+B.b6K=new A.ac("M\xe9g nincs hozz\xe1adott term\xe9k az aj\xe1nlathoz",null,null,null,null,null,null,null,null,null)
+B.aVv=new A.aB(B.b0,B.b6K,null)
 B.VL=new A.q7(null,null,null,B.aVv,null)
 B.VM=new A.Ez(null,null,null,null,null,null)
 B.vq=new A.z(!0,null,null,null,null,null,18,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.b7p=new A.ac("Nincs tal\xe1lat vagy m\xe9g nincs kiemelt partner.",null,B.vq,null,null,null,null,null,null,null)
 B.VN=new A.e2(B.ah,null,null,B.b7p,null)
-B.jm=new A.aN(57616,"MaterialIcons",!1)
-B.rH=new A.bz(B.jm,50,null,null,null)
-B.VO=new A.e2(B.ah,null,null,B.rH,null)
-B.b6A=new A.ac("M\xe9g nincs visszajelz\xe9s",null,null,null,null,null,null,null,null,null)
-B.VP=new A.e2(B.ah,null,null,B.b6A,null)
-B.b6J=new A.ac("M\xe9g nincs felm\xe9r\xe9s",null,B.vq,null,null,null,null,null,null,null)
-B.VQ=new A.e2(B.ah,null,null,B.b6J,null)
-B.b6Z=new A.ac("Nincs kiv\xe1lasztott k\xe9p",null,null,null,null,null,null,null,null,null)
-B.VR=new A.e2(B.ah,null,null,B.b6Z,null)
 B.b4r=new A.z(!0,null,null,null,null,null,24,B.aQ,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.cz=new A.pc(2,"center")
-B.b6I=new A.ac("V\xe1laszthat\xf3 k\xe9sz\xfcl\xe9kek",null,B.b4r,B.cz,null,null,null,null,null,null)
-B.VS=new A.e2(B.ah,null,null,B.b6I,null)
+B.b7g=new A.ac("Aj\xe1nlott k\xe9sz\xfcl\xe9kek",null,B.b4r,B.cz,null,null,null,null,null,null)
+B.VO=new A.e2(B.ah,null,null,B.b7g,null)
+B.jm=new A.aN(57616,"MaterialIcons",!1)
+B.rH=new A.bz(B.jm,50,null,null,null)
+B.VP=new A.e2(B.ah,null,null,B.rH,null)
+B.b6A=new A.ac("M\xe9g nincs visszajelz\xe9s",null,null,null,null,null,null,null,null,null)
+B.VQ=new A.e2(B.ah,null,null,B.b6A,null)
+B.b6I=new A.ac("M\xe9g nincs felm\xe9r\xe9s",null,B.vq,null,null,null,null,null,null,null)
+B.VR=new A.e2(B.ah,null,null,B.b6I,null)
+B.b6Y=new A.ac("Nincs kiv\xe1lasztott k\xe9p",null,null,null,null,null,null,null,null,null)
+B.VS=new A.e2(B.ah,null,null,B.b6Y,null)
 B.Ra=new A.z(!0,null,null,null,null,null,16,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.b7z=new A.ac("M\xe9g nincs jav\xedt\xe1s r\xf6gz\xedtve",null,B.Ra,null,null,null,null,null,null,null)
 B.VT=new A.e2(B.ah,null,null,B.b7z,null)
@@ -133923,8 +133923,8 @@ B.zI=new A.bz(B.rB,60,null,null,null)
 B.VX=new A.e2(B.ah,null,null,B.zI,null)
 B.b7n=new A.ac("Nincs tal\xe1lat vagy nincs karbantart\xe1s",null,null,null,null,null,null,null,null,null)
 B.VY=new A.e2(B.ah,null,null,B.b7n,null)
-B.b7c=new A.ac("Nincs telep\xedtett k\xe9sz\xfcl\xe9k.",null,null,null,null,null,null,null,null,null)
-B.VZ=new A.e2(B.ah,null,null,B.b7c,null)
+B.b7b=new A.ac("Nincs telep\xedtett k\xe9sz\xfcl\xe9k.",null,null,null,null,null,null,null,null,null)
+B.VZ=new A.e2(B.ah,null,null,B.b7b,null)
 B.b8h=new A.ac("Nincs tal\xe1lat",null,null,null,null,null,null,null,null,null)
 B.W0=new A.e2(B.ah,null,null,B.b8h,null)
 B.b8b=new A.ac("Nincs karbantart\xe1s el\u0151zm\xe9ny.",null,null,null,null,null,null,null,null,null)
@@ -134402,8 +134402,8 @@ B.yI=new A.uc(!1,!1,!1,!1)
 B.yJ=new A.uc(!1,!1,!1,!0)
 B.eI=new A.Uw(0,"tight")
 B.vp=new A.z(!0,null,null,null,null,null,14,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.b7a=new A.ac("Oldalfali Monosplit",null,B.vp,null,null,null,null,null,null,null)
-B.a_u=new A.FU(1,B.eI,B.b7a,null)
+B.b79=new A.ac("Oldalfali Monosplit",null,B.vp,null,null,null,null,null,null,null)
+B.a_u=new A.FU(1,B.eI,B.b79,null)
 B.a_v=new A.FX(null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.a_w=new A.ud(0,"red")
 B.a_x=new A.ud(1,"green")
@@ -134854,13 +134854,13 @@ B.En=s([3226,6412,200,168,38,38,134,134,100,100,100,100,68,68,68,68],t.t)
 B.alM=s([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,3,7],t.t)
 B.b84=new A.ac("Minimum \xe9vente, a Garancia \xe9s az eg\xe9szs\xe9g felt\xe9tele.",null,null,null,null,null,null,null,null,null)
 B.b7D=new A.ac("1 K\xe9sz\xfcl\xe9k eset\xe9n ez brt.:20.000Ft",null,null,null,null,null,null,null,null,null)
-B.b6S=new A.ac("2 k\xe9sz\xfcl\xe9k eset\xe9n ez brt.:35.000Ft)",null,null,null,null,null,null,null,null,null)
+B.b6R=new A.ac("2 k\xe9sz\xfcl\xe9k eset\xe9n ez brt.:35.000Ft)",null,null,null,null,null,null,null,null,null)
 B.b8p=new A.ac("3-10 k\xe9sz\xfcl\xe9k eset\xe9n ez brt.:15.000Ft/k\xe9sz\xfcl\xe9k",null,null,null,null,null,null,null,null,null)
-B.b6N=new A.ac("10 k\xe9sz\xfcl\xe9k felett szem\xe9lyes megbesz\xe9l\xe9s ut\xe1n",null,null,null,null,null,null,null,null,null)
+B.b6M=new A.ac("10 k\xe9sz\xfcl\xe9k felett szem\xe9lyes megbesz\xe9l\xe9s ut\xe1n",null,null,null,null,null,null,null,null,null)
 B.Rm=new A.ac("Teljes k\xf6r\u0171 online \xfcgyint\xe9z\xe9s.",null,null,null,null,null,null,null,null,null)
 B.Rh=new A.ac("Karbantart\xe1si eml\xe9keztet\u0151,Emailben,vagy Sms-ben is.",null,null,null,null,null,null,null,null,null)
 B.Rj=new A.ac("5 \xe9v teljes k\xf6r\xfc garanci\xe1t!",null,null,null,null,null,null,null,null,null)
-B.alN=s([B.b84,B.bw,B.b7D,B.bw,B.b6S,B.bw,B.b8p,B.bw,B.b6N,B.bw,B.Rm,B.bw,B.Rh,B.Rj,B.bw],t.p)
+B.alN=s([B.b84,B.bw,B.b7D,B.bw,B.b6R,B.bw,B.b8p,B.bw,B.b6M,B.bw,B.Rm,B.bw,B.Rh,B.Rj,B.bw],t.p)
 B.t9=s(["Karbantart\xe1s","\xdaj telep\xedt\xe9s","Felm\xe9r\xe9s","Jav\xedt\xe1s","Egy\xe9b"],t.s)
 B.ark=s([3,3,11],t.t)
 B.axb=s([4,9,14,19],t.t)
@@ -135017,11 +135017,11 @@ B.b8k=new A.ac("V\xe9ber Rich\xe1rd",null,B.vo,null,null,null,null,null,null,nul
 B.b7S=new A.ac("V\xe9ber Cool",null,null,null,null,null,null,null,null,null)
 B.b7V=new A.ac(u.n,null,null,null,null,null,null,null,null,null)
 B.a2=new A.dg(null,12,null,null)
-B.b6T=new A.ac("Tel: +36 20 914 1308",null,null,null,null,null,null,null,null,null)
-B.b76=new A.ac("Tel: +36 70 363 5858",null,null,null,null,null,null,null,null,null)
+B.b6S=new A.ac("Tel: +36 20 914 1308",null,null,null,null,null,null,null,null,null)
+B.b75=new A.ac("Tel: +36 70 363 5858",null,null,null,null,null,null,null,null,null)
 B.b7W=new A.ac("Email: info@vebercool.hu",null,null,null,null,null,null,null,null,null)
 B.b7G=new A.ac("C\xedm: 2030 \xc9rd, Aggteleki utca 36.",null,null,null,null,null,null,null,null,null)
-B.az2=s([B.b88,B.ci,B.b8k,B.ci,B.b7S,B.b7V,B.a2,B.b6T,B.b76,B.b7W,B.b7G],t.p)
+B.az2=s([B.b88,B.ci,B.b8k,B.ci,B.b7S,B.b7V,B.a2,B.b6S,B.b75,B.b7W,B.b7G],t.p)
 B.w6=new A.P1(0,"named")
 B.Sp=new A.P1(1,"anonymous")
 B.az9=s([B.w6,B.Sp],A.ao("y<P1>"))
@@ -135103,8 +135103,8 @@ B.aLU=s([B.d1,B.cB,B.e4],A.ao("y<nl>"))
 B.FB=s([0,1,2,3,4,5,6,7,8,8,9,9,10,10,11,11,12,12,12,12,13,13,13,13,14,14,14,14,15,15,15,15,16,16,16,16,16,16,16,16,17,17,17,17,17,17,17,17,18,18,18,18,18,18,18,18,19,19,19,19,19,19,19,19,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,21,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,22,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,23,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,24,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,25,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,26,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,27,28],t.t)
 B.aM0=s([1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],t.t)
 B.aM3=s([B.yK,B.rl,B.rm],A.ao("y<zh>"))
-B.b6U=new A.ac("F\xe9l \xe9ves",null,null,null,null,null,null,null,null,null)
-B.Zo=new A.ei("F\xe9l \xe9ves",B.b6U,B.bQ,null,t.b7)
+B.b6T=new A.ac("F\xe9l \xe9ves",null,null,null,null,null,null,null,null,null)
+B.Zo=new A.ei("F\xe9l \xe9ves",B.b6T,B.bQ,null,t.b7)
 B.b7A=new A.ac("\xc9ves",null,null,null,null,null,null,null,null,null)
 B.Zh=new A.ei("\xc9ves",B.b7A,B.bQ,null,t.b7)
 B.b6H=new A.ac("2 \xe9ves",null,null,null,null,null,null,null,null,null)
@@ -135116,8 +135116,8 @@ B.FC=s([B.h6,B.iG,B.iH,B.h7,B.iI,B.wj,B.SK,B.wi],A.ao("y<ju>"))
 B.aMx=s([254,253,251,247,239,223,191,127],t.t)
 B.b86=new A.ac("Siker\xfclt",null,null,null,null,null,null,null,null,null)
 B.Zg=new A.ei("siker\xfclt",B.b86,B.bQ,null,t.b7)
-B.b6O=new A.ac("Nem siker\xfclt",null,null,null,null,null,null,null,null,null)
-B.Zj=new A.ei("nem siker\xfclt",B.b6O,B.bQ,null,t.b7)
+B.b6N=new A.ac("Nem siker\xfclt",null,null,null,null,null,null,null,null,null)
+B.Zj=new A.ei("nem siker\xfclt",B.b6N,B.bQ,null,t.b7)
 B.FD=s([B.Zg,B.Zj],t.FG)
 B.nC=s([12,8,140,8,76,8,204,8,44,8,172,8,108,8,236,8,28,8,156,8,92,8,220,8,60,8,188,8,124,8,252,8,2,8,130,8,66,8,194,8,34,8,162,8,98,8,226,8,18,8,146,8,82,8,210,8,50,8,178,8,114,8,242,8,10,8,138,8,74,8,202,8,42,8,170,8,106,8,234,8,26,8,154,8,90,8,218,8,58,8,186,8,122,8,250,8,6,8,134,8,70,8,198,8,38,8,166,8,102,8,230,8,22,8,150,8,86,8,214,8,54,8,182,8,118,8,246,8,14,8,142,8,78,8,206,8,46,8,174,8,110,8,238,8,30,8,158,8,94,8,222,8,62,8,190,8,126,8,254,8,1,8,129,8,65,8,193,8,33,8,161,8,97,8,225,8,17,8,145,8,81,8,209,8,49,8,177,8,113,8,241,8,9,8,137,8,73,8,201,8,41,8,169,8,105,8,233,8,25,8,153,8,89,8,217,8,57,8,185,8,121,8,249,8,5,8,133,8,69,8,197,8,37,8,165,8,101,8,229,8,21,8,149,8,85,8,213,8,53,8,181,8,117,8,245,8,13,8,141,8,77,8,205,8,45,8,173,8,109,8,237,8,29,8,157,8,93,8,221,8,61,8,189,8,125,8,253,8,19,9,275,9,147,9,403,9,83,9,339,9,211,9,467,9,51,9,307,9,179,9,435,9,115,9,371,9,243,9,499,9,11,9,267,9,139,9,395,9,75,9,331,9,203,9,459,9,43,9,299,9,171,9,427,9,107,9,363,9,235,9,491,9,27,9,283,9,155,9,411,9,91,9,347,9,219,9,475,9,59,9,315,9,187,9,443,9,123,9,379,9,251,9,507,9,7,9,263,9,135,9,391,9,71,9,327,9,199,9,455,9,39,9,295,9,167,9,423,9,103,9,359,9,231,9,487,9,23,9,279,9,151,9,407,9,87,9,343,9,215,9,471,9,55,9,311,9,183,9,439,9,119,9,375,9,247,9,503,9,15,9,271,9,143,9,399,9,79,9,335,9,207,9,463,9,47,9,303,9,175,9,431,9,111,9,367,9,239,9,495,9,31,9,287,9,159,9,415,9,95,9,351,9,223,9,479,9,63,9,319,9,191,9,447,9,127,9,383,9,255,9,511,9,0,7,64,7,32,7,96,7,16,7,80,7,48,7,112,7,8,7,72,7,40,7,104,7,24,7,88,7,56,7,120,7,4,7,68,7,36,7,100,7,20,7,84,7,52,7,116,7,3,8,131,8,67,8,195,8,35,8,163,8,99,8,227,8],t.t)
 B.FE=s([A.bsj(),A.bsb(),A.bsq(),A.bso(),A.bsl(),A.bsk(),A.bsm()],t.ox)
@@ -135353,8 +135353,8 @@ B.Ak=s([0,8,0,8],t.t)
 B.Fb=s([4,4,4,4],t.t)
 B.axa=s([4,4,0,0],t.t)
 B.FO=s([B.ts,B.azd,B.arl,B.Ak,B.ts,B.Fb,B.axa,B.Ak],t.q)
-B.b6Q=new A.ac("Van",null,null,null,null,null,null,null,null,null)
-B.Zq=new A.ei("van",B.b6Q,B.bQ,null,t.b7)
+B.b6P=new A.ac("Van",null,null,null,null,null,null,null,null,null)
+B.Zq=new A.ei("van",B.b6P,B.bQ,null,t.b7)
 B.b6G=new A.ac("Nincs",null,null,null,null,null,null,null,null,null)
 B.Zr=new A.ei("nincs",B.b6G,B.bQ,null,t.b7)
 B.aOv=s([B.Zq,B.Zr],t.FG)
@@ -135377,8 +135377,8 @@ B.b80=new A.ac("Eladott",null,null,null,null,null,null,null,null,null)
 B.Zi=new A.ei("Eladott",B.b80,B.bQ,null,t.b7)
 B.b7x=new A.ac("Megl\xe9v\u0151",null,null,null,null,null,null,null,null,null)
 B.Zs=new A.ei("Megl\xe9v\u0151",B.b7x,B.bQ,null,t.b7)
-B.b6K=new A.ac("Hozott",null,null,null,null,null,null,null,null,null)
-B.Zm=new A.ei("Hozott",B.b6K,B.bQ,null,t.b7)
+B.b6J=new A.ac("Hozott",null,null,null,null,null,null,null,null,null)
+B.Zm=new A.ei("Hozott",B.b6J,B.bQ,null,t.b7)
 B.FQ=s([B.Zi,B.Zs,B.Zm],t.FG)
 B.FR=s([80,88,23,71,30,30,62,62,4,4,4,4,4,4,4,4,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,35,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,51,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41,41],t.t)
 B.aOE=s([35,30,20,25,30,35,30,25,25],t.n)
@@ -135386,8 +135386,8 @@ B.nD=s([0,1,4,5,16,17,20,21,64,65,68,69,80,81,84,85,256,257,260,261,272,273,276,
 B.FS=s([127,127,191,127,159,191,223,127,143,159,175,191,207,223,239,127,135,143,151,159,167,175,183,191,199,207,215,223,231,239,247,127,131,135,139,143,147,151,155,159,163,167,171,175,179,183,187,191,195,199,203,207,211,215,219,223,227,231,235,239,243,247,251,127,129,131,133,135,137,139,141,143,145,147,149,151,153,155,157,159,161,163,165,167,169,171,173,175,177,179,181,183,185,187,189,191,193,195,197,199,201,203,205,207,209,211,213,215,217,219,221,223,225,227,229,231,233,235,237,239,241,243,245,247,249,251,253,127],t.t)
 B.b7i=new A.ac("Minden \xe1ltalunk elv\xe9gzett munk\xe1ra 5\xe9v garanci\xe1t v\xe1llalunk. A k\xe9sz\xfcl\xe9kekre pedig a gy\xe1rt\xf3 \xe1ltal meg\xe1llap\xedtott id\u0151 \xe9rv\xe9nyes.",null,null,null,null,null,null,null,null,null)
 B.b7M=new A.ac("Az \xe1ltal\xe1nos garancia a k\xe9sz\xfcl\xe9kekre 3 \xe9v Teljesk\xf6r\u0171, valamint plusz 2 \xe9v kompresszor garancia.",null,null,null,null,null,null,null,null,null)
-B.b6V=new A.ac("Gree term\xe9kekre a 10 \xe9v garancia! Felt\xe9tele az \xe9vi k\xe9t igazolt karbantart\xe1s.",null,null,null,null,null,null,null,null,null)
-B.aOG=s([B.b7i,B.bw,B.b7M,B.bw,B.b6V],t.p)
+B.b6U=new A.ac("Gree term\xe9kekre a 10 \xe9v garancia! Felt\xe9tele az \xe9vi k\xe9t igazolt karbantart\xe1s.",null,null,null,null,null,null,null,null,null)
+B.aOG=s([B.b7i,B.bw,B.b7M,B.bw,B.b6U],t.p)
 B.FT=s([7,6,6,5,5,5,5,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0],t.t)
 B.nE=s([28679,28679,31752,-32759,-31735,-30711,-29687,-28663,29703,29703,30727,30727,-27639,-26615,-25591,-24567],t.t)
 B.aOU=s(["click","scroll"],t.s)
@@ -135606,12 +135606,12 @@ B.aYG=new A.lJ(5,"multiChannel")
 B.aYH=new A.lJ(6,"duoTone")
 B.PA=new A.lJ(7,"lab")
 B.aRh=s([B.aYE,B.Px,B.aYF,B.Py,B.Pz,B.aYG,B.aYH,B.PA],A.ao("y<lJ>"))
-B.b6W=new A.ac(u.G,null,null,null,null,null,null,null,null,null)
+B.b6V=new A.ac(u.G,null,null,null,null,null,null,null,null,null)
 B.b6v=new A.ac("Az elektromos bek\xf6t\xe9s dugvill\xe1s megold\xe1ssal, vagy k\xfcl\xf6n kismegszak\xedt\xf3val kapcsolhat\xf3 \xe1ramk\xf6rre.",null,null,null,null,null,null,null,null,null)
 B.b7m=new A.ac("A telep\xedt\xe9s sor\xe1n felhaszn\xe1lt minden alapanyagot( festhet\u0151 k\xe1belcsatorna, elektromos vezet\xe9kek,szigetelt r\xe9zcs\xf6vek, konzolt, stb...)",null,null,null,null,null,null,null,null,null)
 B.b7Q=new A.ac("2mm vastag rezg\xe9s csillap\xedt\xf3 gummibakok.",null,null,null,null,null,null,null,null,null)
 B.b7T=new A.ac("Oktat\xe1s a k\xe9sz\xfcl\xe9k haszn\xe1lat\xe1r\xf3l",null,null,null,null,null,null,null,null,null)
-B.aRk=s([B.b6W,B.bw,B.b6v,B.bw,B.b7m,B.bw,B.b7Q,B.bw,B.b7T,B.bw,B.Rm,B.bw,B.Rh,B.Rj,B.bw],t.p)
+B.aRk=s([B.b6V,B.bw,B.b6v,B.bw,B.b7m,B.bw,B.b7Q,B.bw,B.b7T,B.bw,B.Rm,B.bw,B.Rh,B.Rj,B.bw],t.p)
 B.aRq=s([0,0,0,0,0,0,0,0,1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,0,0,0],t.t)
 B.aRr=s(["/UseNone","/UseOutlines","/UseThumbs","/FullScreen"],t.s)
 B.ru=new A.iZ(100)
@@ -140619,24 +140619,24 @@ B.b0M=new A.n7(3,"hide")
 B.bd5=new A.n7(4,"remove")
 B.b0N=new A.n7(5,"timeout")
 B.b0O=new A.Bc(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
-B.b73=new A.ac("Felm\xe9r\xe9s mentve",null,null,null,null,null,null,null,null,null)
-B.b0P=new A.eo(B.b73,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
+B.b72=new A.ac("Felm\xe9r\xe9s mentve",null,null,null,null,null,null,null,null,null)
+B.b0P=new A.eo(B.b72,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b8e=new A.ac("Adj hozz\xe1 legal\xe1bb egy term\xe9ket",null,null,null,null,null,null,null,null,null)
 B.b0Q=new A.eo(B.b8e,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
-B.b77=new A.ac("V\xe1lassz k\xe9sz\xfcl\xe9ket",null,null,null,null,null,null,null,null,null)
-B.b0R=new A.eo(B.b77,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
+B.b76=new A.ac("V\xe1lassz k\xe9sz\xfcl\xe9ket",null,null,null,null,null,null,null,null,null)
+B.b0R=new A.eo(B.b76,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7H=new A.ac("A k\xe9sz\xfcl\xe9k neve k\xf6telez\u0151",null,null,null,null,null,null,null,null,null)
 B.b0S=new A.eo(B.b7H,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7O=new A.ac("Term\xe9k friss\xedtve",null,null,null,null,null,null,null,null,null)
 B.b0T=new A.eo(B.b7O,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b8l=new A.ac("Aj\xe1nlat elfogadva",null,null,null,null,null,null,null,null,null)
 B.b0U=new A.eo(B.b8l,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
-B.b6P=new A.ac("\xc1raj\xe1nlat mentve",null,null,null,null,null,null,null,null,null)
-B.b0V=new A.eo(B.b6P,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
+B.b6O=new A.ac("\xc1raj\xe1nlat mentve",null,null,null,null,null,null,null,null,null)
+B.b0V=new A.eo(B.b6O,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b8g=new A.ac("V\xe1lassz egy k\xe9sz\xfcl\xe9ket.",null,null,null,null,null,null,null,null,null)
 B.b0W=new A.eo(B.b8g,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
-B.b70=new A.ac("A n\xe9v megad\xe1sa k\xf6telez\u0151",null,null,null,null,null,null,null,null,null)
-B.b0X=new A.eo(B.b70,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
+B.b7_=new A.ac("A n\xe9v megad\xe1sa k\xf6telez\u0151",null,null,null,null,null,null,null,null,null)
+B.b0X=new A.eo(B.b7_,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b8_=new A.ac("Az \xfcgyf\xe9l azonos\xedt\xf3 hi\xe1nyzik",null,null,null,null,null,null,null,null,null)
 B.b0Y=new A.eo(B.b8_,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7v=new A.ac("Karbantart\xe1s r\xf6gz\xedtve",null,null,null,null,null,null,null,null,null)
@@ -140645,8 +140645,8 @@ B.b8m=new A.ac("V\xe1lassz megl\xe9v\u0151 \xfcgyfelet.",null,null,null,null,nul
 B.b1_=new A.eo(B.b8m,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7P=new A.ac("Jav\xedt\xe1s mentve",null,null,null,null,null,null,null,null,null)
 B.b10=new A.eo(B.b7P,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
-B.b72=new A.ac("V\xe1lassz \xfcgyfelet",null,null,null,null,null,null,null,null,null)
-B.b11=new A.eo(B.b72,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
+B.b71=new A.ac("V\xe1lassz \xfcgyfelet",null,null,null,null,null,null,null,null,null)
+B.b11=new A.eo(B.b71,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7B=new A.ac("A karbantart\xe1s d\xe1tuma k\xf6telez\u0151",null,null,null,null,null,null,null,null,null)
 B.b12=new A.eo(B.b7B,null,null,null,null,null,null,null,null,null,null,null,null,B.ao,!1,null,null,null,B.F,null)
 B.b7q=new A.ac("Term\xe9k hozz\xe1adva",null,null,null,null,null,null,null,null,null)
@@ -141078,21 +141078,21 @@ B.b6B=new A.ac("Karbantart\xe1s r\xf6gz\xedt\xe9se",null,B.dH,null,null,null,nul
 B.b6C=new A.ac("Kiv\xe1lasztott felm\xe9r\xe9si k\xe9pek",null,B.dH,null,null,null,null,null,null,null)
 B.b6D=new A.ac("Aj\xe1nlat ment\xe9se \xe9s el\u0151n\xe9zet",null,null,null,null,null,null,null,null,null)
 B.b6E=new A.ac("Kiemelt partnerek",null,null,null,null,null,null,null,null,null)
-B.b6M=new A.ac("Hozz\xe1ad",null,null,null,null,null,null,null,null,null)
-B.b6R=new A.ac("El\u0151zm\xe9nyek",null,B.fU,null,null,null,null,null,null,null)
-B.b6X=new A.ac("\xc1raj\xe1nlat",null,null,null,null,null,null,null,null,null)
-B.b6Y=new A.ac("T\xf6rl\xe9s",null,null,null,null,null,null,null,null,null)
-B.b7_=new A.ac("\xdaj term\xe9k hozz\xe1ad\xe1sa",null,null,null,null,null,null,null,null,null)
-B.b71=new A.ac("Nincs tal\xe1lat vagy m\xe9g nincs k\xe9sz\xfcl\xe9k hozz\xe1adva.",null,B.kF,null,null,null,null,null,null,null)
-B.b74=new A.ac("\xdcgyfelek",null,null,null,null,null,null,null,null,null)
-B.b75=new A.ac("\xdcgyf\xe9l t\xf6rl\xe9se",null,null,null,null,null,null,null,null,null)
-B.b78=new A.ac("Vonalk\xf3d beolvas\xe1sa",null,null,null,null,null,null,null,null,null)
-B.b79=new A.ac("Karbantart\xe1sok",null,B.dH,null,null,null,null,null,null,null)
-B.b7b=new A.ac("Hozz\xe1ad\xe1s",null,null,null,null,null,null,null,null,null)
-B.b7d=new A.ac("\xdaj id\u0151pont megad\xe1sa",null,null,null,null,null,null,null,null,null)
-B.b7e=new A.ac("Hozz\xe1ad\xe1s az aj\xe1nlathoz",null,null,null,null,null,null,null,null,null)
-B.b7f=new A.ac("Karbantart\xe1s r\xf6gz\xedt\xe9se",null,null,null,null,null,null,null,null,null)
-B.b7g=new A.ac("Kiv\xe1laszt\xe1s gal\xe9ri\xe1b\xf3l",null,null,null,null,null,null,null,null,null)
+B.b6L=new A.ac("Hozz\xe1ad",null,null,null,null,null,null,null,null,null)
+B.b6Q=new A.ac("El\u0151zm\xe9nyek",null,B.fU,null,null,null,null,null,null,null)
+B.b6W=new A.ac("\xc1raj\xe1nlat",null,null,null,null,null,null,null,null,null)
+B.b6X=new A.ac("T\xf6rl\xe9s",null,null,null,null,null,null,null,null,null)
+B.b6Z=new A.ac("\xdaj term\xe9k hozz\xe1ad\xe1sa",null,null,null,null,null,null,null,null,null)
+B.b70=new A.ac("Nincs tal\xe1lat vagy m\xe9g nincs k\xe9sz\xfcl\xe9k hozz\xe1adva.",null,B.kF,null,null,null,null,null,null,null)
+B.b73=new A.ac("\xdcgyfelek",null,null,null,null,null,null,null,null,null)
+B.b74=new A.ac("\xdcgyf\xe9l t\xf6rl\xe9se",null,null,null,null,null,null,null,null,null)
+B.b77=new A.ac("Vonalk\xf3d beolvas\xe1sa",null,null,null,null,null,null,null,null,null)
+B.b78=new A.ac("Karbantart\xe1sok",null,B.dH,null,null,null,null,null,null,null)
+B.b7a=new A.ac("Hozz\xe1ad\xe1s",null,null,null,null,null,null,null,null,null)
+B.b7c=new A.ac("\xdaj id\u0151pont megad\xe1sa",null,null,null,null,null,null,null,null,null)
+B.b7d=new A.ac("Hozz\xe1ad\xe1s az aj\xe1nlathoz",null,null,null,null,null,null,null,null,null)
+B.b7e=new A.ac("Karbantart\xe1s r\xf6gz\xedt\xe9se",null,null,null,null,null,null,null,null,null)
+B.b7f=new A.ac("Kiv\xe1laszt\xe1s gal\xe9ri\xe1b\xf3l",null,null,null,null,null,null,null,null,null)
 B.b7h=new A.ac("Felm\xe9r\xe9s r\xf6gz\xedt\xe9se",null,null,null,null,null,null,null,null,null)
 B.b7j=new A.ac("Karbantart\xe1s hozz\xe1ad\xe1sa",null,null,null,null,null,null,null,null,null)
 B.kH=new A.ac("Ment\xe9s",null,null,null,null,null,null,null,null,null)
