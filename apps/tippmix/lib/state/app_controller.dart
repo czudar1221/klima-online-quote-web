@@ -1,11 +1,14 @@
 import 'package:flutter/foundation.dart';
 
 import '../ai/openai_explainer.dart';
+import '../data/curated_squads.dart';
 import '../data/local_store.dart';
 import '../data/match_feed.dart';
 import '../data/models.dart';
+import '../data/squad.dart';
 import '../engine/probability.dart';
 import '../engine/rational.dart';
+import '../engine/strength.dart';
 import '../l10n/copy.dart';
 
 enum CalcMode { accumulator, combination }
@@ -14,13 +17,16 @@ class AppController extends ChangeNotifier {
   AppController({
     required MatchFeed feed,
     required LocalStore store,
+    TeamDirectory? squads,
     OpenAiExplainer? explainer,
   }) : _feed = feed,
        _store = store,
+       squads = squads ?? curatedHungarianSquads(),
        _explainer = explainer ?? OpenAiExplainer();
 
   final MatchFeed _feed;
   final LocalStore _store;
+  final TeamDirectory squads;
   final OpenAiExplainer _explainer;
 
   List<SportsMatch> sampleUpcoming = [];
@@ -49,10 +55,13 @@ class AppController extends ChangeNotifier {
     return [...sampleLive, ...extra];
   }
 
+  BlendedMatch blendedFor(SportsMatch match) =>
+      StrengthModel.blend(match, squads);
+
   IndependentEvents? get events {
     if (slip.isEmpty) return null;
     return IndependentEvents([
-      for (final leg in slip) leg.fairProbability,
+      for (final leg in slip) blendedFor(leg.match).blended[leg.pick],
     ]);
   }
 
@@ -195,6 +204,17 @@ class AppController extends ChangeNotifier {
       isAccumulator: mode == CalcMode.accumulator,
       requiredHits: mode == CalcMode.accumulator ? slip.length : requiredHits,
       legCount: slip.length,
+      blendNote: slip
+          .map((leg) {
+            final b = blendedFor(leg.match);
+            return '${leg.match.home}–${leg.match.away}: '
+                'piac ${b.market.fair[0].toPercentString()}/'
+                '${b.market.fair[1].toPercentString()}/'
+                '${b.market.fair[2].toPercentString()}'
+                '${b.model == null ? '' : ', modell ${b.model!.home.toPercentString()}/${b.model!.draw.toPercentString()}/${b.model!.away.toPercentString()}'}'
+                ', kevert ${b.blended.home.toPercentString()}/${b.blended.draw.toPercentString()}/${b.blended.away.toPercentString()}';
+          })
+          .join('\n'),
     );
     explaining = false;
     notifyListeners();

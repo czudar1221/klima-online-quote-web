@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../data/models.dart';
-import '../engine/probability.dart';
 import '../engine/rational.dart';
+import '../engine/strength.dart';
 import '../l10n/copy.dart';
 import '../state/app_controller.dart';
 import '../theme/app_theme.dart';
 import '../widgets/disclaimer_note.dart';
+import '../widgets/squad_strip.dart';
 import 'app_shell.dart';
 
 class CalculatorScreen extends StatelessWidget {
@@ -66,6 +67,9 @@ class CalculatorScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 10),
                   child: _LegTile(
                     leg: leg,
+                    blended: controller
+                        .blendedFor(leg.match)
+                        .blended[leg.pick],
                     onRemove: () => controller.removeLeg(leg.match.id),
                   ),
                 ),
@@ -95,7 +99,9 @@ class CalculatorScreen extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               if (controller.slip.length == 1)
-                _MarketTable(match: controller.slip.first.match),
+                _BlendTable(
+                  blended: controller.blendedFor(controller.slip.first.match),
+                ),
               const SizedBox(height: 12),
               FilledButton(
                 onPressed: controller.saveCurrentToHistory,
@@ -129,8 +135,13 @@ class CalculatorScreen extends StatelessWidget {
 }
 
 class _LegTile extends StatelessWidget {
-  const _LegTile({required this.leg, required this.onRemove});
+  const _LegTile({
+    required this.leg,
+    required this.blended,
+    required this.onRemove,
+  });
   final SlipLeg leg;
+  final Rational blended;
   final VoidCallback onRemove;
 
   @override
@@ -143,9 +154,7 @@ class _LegTile extends StatelessWidget {
     return Card(
       child: ListTile(
         title: Text('${leg.match.home} ${Copy.vs} ${leg.match.away}'),
-        subtitle: Text(
-          '$pick · ${Copy.fair} ${leg.fairProbability.toPercentString()}',
-        ),
+        subtitle: Text('$pick · ${Copy.blended} ${blended.toPercentString()}'),
         trailing: IconButton(
           tooltip: Copy.removeLeg,
           onPressed: onRemove,
@@ -156,18 +165,15 @@ class _LegTile extends StatelessWidget {
   }
 }
 
-class _MarketTable extends StatelessWidget {
-  const _MarketTable({required this.match});
-  final SportsMatch match;
+class _BlendTable extends StatelessWidget {
+  const _BlendTable({required this.blended});
+  final BlendedMatch blended;
 
   @override
   Widget build(BuildContext context) {
-    final MarketProbabilities market = match.market;
     final labels = [Copy.outcomeHome, Copy.outcomeDraw, Copy.outcomeAway];
-    var fairSum = Rational.zero;
-    for (final p in market.fair) {
-      fairSum += p;
-    }
+    final market = blended.market;
+    final model = blended.model;
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -178,21 +184,29 @@ class _MarketTable extends StatelessWidget {
               Copy.marketBreakdown,
               style: Theme.of(context).textTheme.titleMedium,
             ),
+            const SizedBox(height: 8),
+            Text(
+              blended.usedSquads
+                  ? '${Copy.blendWeight}: ${blended.modelWeight.toPercentString()}'
+                  : Copy.marketOnly,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
             const SizedBox(height: 10),
             for (var i = 0; i < 3; i++)
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 4),
                 child: Row(
                   children: [
-                    SizedBox(width: 28, child: Text(labels[i])),
+                    SizedBox(width: 22, child: Text(labels[i])),
                     Expanded(
                       child: Text(
-                        '${Copy.implied} ${market.implied[i].toPercentString()}',
+                        '${Copy.fair} ${market.fair[i].toPercentString()}'
+                        '${model == null ? '' : '  ·  ${Copy.modelOnly} ${model.asList[i].toPercentString()}'}',
                         style: Theme.of(context).textTheme.bodySmall,
                       ),
                     ),
                     Text(
-                      '${Copy.fair} ${market.fair[i].toPercentString()}',
+                      blended.blended.asList[i].toPercentString(),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         color: AppColors.navy,
@@ -204,9 +218,23 @@ class _MarketTable extends StatelessWidget {
             const Divider(),
             Text(
               '${Copy.overround} ${market.overround.toDecimalString(decimals: 4)}  ·  '
-              '${Copy.margin} ${market.margin.toPercentString()}  ·  '
-              '${Copy.fairSum} ${fairSum.toDecimalString(decimals: 4)}',
+              '${Copy.margin} ${market.margin.toPercentString()}',
               style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 12),
+            Text(
+              Copy.formulaTitle,
+              style: Theme.of(context).textTheme.titleMedium,
+            ),
+            const SizedBox(height: 6),
+            Text(
+              Copy.formulaNote,
+              style: Theme.of(context).textTheme.bodySmall,
+            ),
+            const SizedBox(height: 12),
+            SquadStrip(
+              home: blended.homeProfile,
+              away: blended.awayProfile,
             ),
           ],
         ),

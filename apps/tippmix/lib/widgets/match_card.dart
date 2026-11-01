@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../data/models.dart';
+import '../data/squad.dart';
 import '../engine/rational.dart';
 import '../l10n/copy.dart';
 import '../theme/app_theme.dart';
+import 'squad_strip.dart';
 
 class MatchCard extends StatelessWidget {
   const MatchCard({
@@ -13,12 +15,16 @@ class MatchCard extends StatelessWidget {
     this.onPick,
     this.onDelete,
     this.selected,
+    this.homeProfile,
+    this.awayProfile,
   });
 
   final SportsMatch match;
   final void Function(Outcome pick)? onPick;
   final VoidCallback? onDelete;
   final Outcome? selected;
+  final TeamProfile? homeProfile;
+  final TeamProfile? awayProfile;
 
   @override
   Widget build(BuildContext context) {
@@ -78,6 +84,8 @@ class MatchCard extends StatelessWidget {
               ].join('  ·  '),
               style: Theme.of(context).textTheme.bodySmall,
             ),
+            const SizedBox(height: 10),
+            SquadStrip(home: homeProfile, away: awayProfile),
             const SizedBox(height: 14),
             Row(
               children: [

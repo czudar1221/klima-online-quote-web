@@ -19,6 +19,7 @@ class OpenAiExplainer {
     required bool isAccumulator,
     required int requiredHits,
     required int legCount,
+    String? blendNote,
   }) async {
     if (!OpenAiConfig.isConfigured) {
       return Copy.explainOffline;
@@ -30,6 +31,7 @@ class OpenAiExplainer {
         'A matematikai motor már kiszámolta a nyerési esélyt: $percent.\n'
         'Összefoglaló: $summary\n'
         'Mód: $mode, lábak: $legCount, szükséges találatok: $requiredHits.\n'
+        '${blendNote ?? ''}\n'
         'Írj 2–4 rövid magyar mondatot. Ismételd meg ezt a százalékot változtatás nélkül. '
         'Ne adj új számot, ne jósolj győztest, ne állítsd biztosnak a kimenetelt.';
 

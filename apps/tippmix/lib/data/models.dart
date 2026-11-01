@@ -19,6 +19,8 @@ class SportsMatch {
   final Rational drawOdds;
   final Rational awayOdds;
   final bool isSample;
+  final String? homeTeamId;
+  final String? awayTeamId;
 
   const SportsMatch({
     required this.id,
@@ -34,6 +36,8 @@ class SportsMatch {
     this.homeScore,
     this.awayScore,
     this.isSample = true,
+    this.homeTeamId,
+    this.awayTeamId,
   });
 
   MarketProbabilities get market => MarketProbabilities.fromDecimalOdds([
@@ -68,6 +72,8 @@ class SportsMatch {
     'drawOdds': drawOdds.toString(),
     'awayOdds': awayOdds.toString(),
     'isSample': isSample,
+    'homeTeamId': homeTeamId,
+    'awayTeamId': awayTeamId,
   };
 
   factory SportsMatch.fromJson(Map<String, dynamic> json) {
@@ -85,6 +91,8 @@ class SportsMatch {
       drawOdds: _parseStored(json['drawOdds'] as String),
       awayOdds: _parseStored(json['awayOdds'] as String),
       isSample: json['isSample'] as bool? ?? false,
+      homeTeamId: json['homeTeamId'] as String?,
+      awayTeamId: json['awayTeamId'] as String?,
     );
   }
 

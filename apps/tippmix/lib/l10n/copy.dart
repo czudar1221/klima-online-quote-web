@@ -1,7 +1,8 @@
 /// All user-facing strings. Hungarian only.
 abstract final class Copy {
   static const appName = 'Tippmix kalkulátor';
-  static const appSubtitle = 'Valószínűség a megadott szorzókból';
+  static const appSubtitle =
+      'Szorzó, forma és keret — pontos törtmodell, nem jóslat';
 
   static const navMatches = 'Meccsek';
   static const navLive = 'Élő';
@@ -10,7 +11,7 @@ abstract final class Copy {
 
   static const matchesTitle = 'Közelgő meccsek';
   static const matchesHint =
-      'Mintaadatok és a te felvételeid. Hivatalos Tippmix-feed nincs bekötve.';
+      'Minta meccsek (nem élő feed) + kurált keretek. A saját felvétel a helyi tárolóba kerül.';
   static const addMatch = 'Saját meccs';
   static const addMatchTitle = 'Meccs felvétele';
   static const saveMatch = 'Mentés';
@@ -24,8 +25,24 @@ abstract final class Copy {
   static const oddsHome = 'Szorzó 1';
   static const oddsDraw = 'Szorzó X';
   static const oddsAway = 'Szorzó 2';
-  static const sampleBadge = 'Minta';
+  static const sampleBadge = 'Minta meccs';
   static const ownBadge = 'Saját';
+  static const curatedBadge = 'Kurált keret';
+  static const liveDataBadge = 'Élő adat';
+  static const noRoster = 'Nincs keret — csak a szorzó számít';
+  static const formLabel = 'Forma';
+  static const keyPlayers = 'Kulcsemberek';
+  static const unavailable = 'nem játszik';
+  static const formWin = 'Gy';
+  static const formDrawShort = 'D';
+  static const formLoss = 'V';
+  static const blended = 'Kevert esély';
+  static const marketOnly = 'Csak piac';
+  static const modelOnly = 'Csapatmodell';
+  static const blendWeight = 'Modell súlya';
+  static const formulaTitle = 'Képlet';
+  static const formulaNote =
+      'P* = 3/5 · P(piac, árrés nélkül) + 2/5 · P(csapatmodell), ha mindkét keret megvan; különben P* = P(piac). A csapatmodell támadás/védelem, hazai előny, forma és hiányzó kulcsemberek. Ez nem garantálja a végeredményt.';
   static const upcoming = 'Közelgő';
   static const live = 'Élő';
   static const finished = 'Lejátszott';
@@ -70,7 +87,7 @@ abstract final class Copy {
   static const fairSum = 'Árrés nélküli összeg';
 
   static const disclaimer =
-      'Ez a százalék a megadott szorzókból számolt, belsőleg konzisztens valószínűség — nem jóslat és nem garancia.';
+      'Ez a százalék a szorzókból, a formából és a keretből számolt, belsőleg konzisztens modell — nem jóslat és nem garancia.';
 
   static const historyTitle = 'Előzmények';
   static const historyHint = 'Csak ezen az eszközön, helyben tárolva.';

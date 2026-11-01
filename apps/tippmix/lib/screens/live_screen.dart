@@ -40,6 +40,14 @@ class LiveScreen extends StatelessWidget {
                         return MatchCard(
                           match: match,
                           selected: selected,
+                          homeProfile: controller.squads.find(
+                            id: match.homeTeamId,
+                            name: match.home,
+                          ),
+                          awayProfile: controller.squads.find(
+                            id: match.awayTeamId,
+                            name: match.away,
+                          ),
                           onPick: (pick) => controller.addLeg(match, pick),
                         );
                       },

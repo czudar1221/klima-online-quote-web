@@ -2,7 +2,7 @@
 
 Prémium Android-alkalmazás Flutterrel: meccsek, élő lista, előzmények és valószínűség-kalkulátor. A felhasználói felület **kizárólag magyar**.
 
-A százalékot **nem** nyelvi modell számolja. A motor tizedes oddsokból implikált valószínűséget képez, levonja az overroundot, majd szelvény/kombináció szerint pontos törtekkel számol.
+A százalékot **nem** nyelvi modell számolja. A motor tizedes szorzókból implikált valószínűséget képez, levonja az overroundot, keveri a kurált csapatmodellel (forma + kulcsemberek, 40% modell / 60% piac, ha van keret), majd szelvény/kombináció szerint pontos törtekkel számol. Képlet a kalkulátor képernyőn és a tervben. Nem garancia.
 
 ## VS Code + Android
 
@@ -21,8 +21,9 @@ VS Code: Run and Debug → **Tippmix (Android)**. Kulcs nélkül: **Tippmix (mat
 
 ## Adat: mi valódi, mi minta
 
-- **Valódi:** a te odds-beviteled, a helyi előzmények, a matematikai motor.
-- **Minta:** a beépített NB I / kupa meccsek és az „élő” percek/állások. Nincs hivatalos Tippmix-API bekötve.
+- **Valódi:** a te szorzó-beviteled, a helyi előzmények, a matematikai motor.
+- **Kurált (nem élő):** csapaterő, forma, kulcsemberek — `lib/data/curated_squads.dart`, a UI-n „Kurált keret”.
+- **Minta (nem élő):** a beépített NB I / kupa meccsek és az „élő” percek/állások. Nincs hivatalos Tippmix-API bekötve.
 - Új forrás: implementáld a `MatchFeed` interfészt (`lib/data/match_feed.dart`), és add át az `AppController`nek. Ne scrapelj.
 
 ## OpenAI
