@@ -1,23 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import 'data/local_store.dart';
-import 'data/sample_feed.dart';
+import 'data/live_feed.dart';
 import 'l10n/copy.dart';
-import 'screens/app_shell.dart';
+import 'screens/home_screen.dart';
 import 'state/app_controller.dart';
 import 'theme/app_theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('hu');
-  await SharedPreferences.getInstance();
-  final controller = AppController(
-    feed: SampleMatchFeed(),
-    store: LocalStore(),
-  );
+  final controller = AppController(feed: LiveSportsFeed());
   await controller.load();
   runApp(TippmixApp(controller: controller));
 }
@@ -40,7 +34,7 @@ class TippmixApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: AppShell(controller: controller),
+      home: HomeScreen(controller: controller),
     );
   }
 }

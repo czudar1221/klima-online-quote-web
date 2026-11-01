@@ -16,11 +16,13 @@ class SportsMatch {
   final int? homeScore;
   final int? awayScore;
   final Rational homeOdds;
-  final Rational drawOdds;
+  final Rational? drawOdds;
   final Rational awayOdds;
   final bool isSample;
   final String? homeTeamId;
   final String? awayTeamId;
+  final String sport;
+  final String sportLabel;
 
   const SportsMatch({
     required this.id,
@@ -30,33 +32,25 @@ class SportsMatch {
     required this.kickoff,
     required this.status,
     required this.homeOdds,
-    required this.drawOdds,
     required this.awayOdds,
+    this.drawOdds,
     this.minute,
     this.homeScore,
     this.awayScore,
-    this.isSample = true,
+    this.isSample = false,
     this.homeTeamId,
     this.awayTeamId,
+    this.sport = 'soccer',
+    this.sportLabel = 'Labdarúgás',
   });
+
+  bool get hasDraw => drawOdds != null;
 
   MarketProbabilities get market => MarketProbabilities.fromDecimalOdds([
     homeOdds,
-    drawOdds,
+    if (drawOdds != null) drawOdds!,
     awayOdds,
   ]);
-
-  Rational oddsFor(Outcome o) => switch (o) {
-    Outcome.home => homeOdds,
-    Outcome.draw => drawOdds,
-    Outcome.away => awayOdds,
-  };
-
-  Rational fairFor(Outcome o) => switch (o) {
-    Outcome.home => market.fair[0],
-    Outcome.draw => market.fair[1],
-    Outcome.away => market.fair[2],
-  };
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -69,11 +63,13 @@ class SportsMatch {
     'homeScore': homeScore,
     'awayScore': awayScore,
     'homeOdds': homeOdds.toString(),
-    'drawOdds': drawOdds.toString(),
+    'drawOdds': drawOdds?.toString(),
     'awayOdds': awayOdds.toString(),
     'isSample': isSample,
     'homeTeamId': homeTeamId,
     'awayTeamId': awayTeamId,
+    'sport': sport,
+    'sportLabel': sportLabel,
   };
 
   factory SportsMatch.fromJson(Map<String, dynamic> json) {
@@ -88,11 +84,15 @@ class SportsMatch {
       homeScore: json['homeScore'] as int?,
       awayScore: json['awayScore'] as int?,
       homeOdds: _parseStored(json['homeOdds'] as String),
-      drawOdds: _parseStored(json['drawOdds'] as String),
+      drawOdds: json['drawOdds'] == null
+          ? null
+          : _parseStored(json['drawOdds'] as String),
       awayOdds: _parseStored(json['awayOdds'] as String),
       isSample: json['isSample'] as bool? ?? false,
       homeTeamId: json['homeTeamId'] as String?,
       awayTeamId: json['awayTeamId'] as String?,
+      sport: json['sport'] as String? ?? 'soccer',
+      sportLabel: json['sportLabel'] as String? ?? 'Labdarúgás',
     );
   }
 
@@ -110,8 +110,6 @@ class SlipLeg {
   final Outcome pick;
 
   const SlipLeg({required this.match, required this.pick});
-
-  Rational get fairProbability => match.fairFor(pick);
 }
 
 class HistoryEntry {

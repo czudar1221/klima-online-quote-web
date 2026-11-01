@@ -178,16 +178,29 @@ abstract final class StrengthModel {
     );
   }
 
+  static ThreeWay threeWayFromMarket(SportsMatch match) {
+    final fair = match.market.fair;
+    if (!match.hasDraw) {
+      return ThreeWay(
+        home: fair[0],
+        draw: Rational.zero,
+        away: fair[1],
+      );
+    }
+    return ThreeWay(home: fair[0], draw: fair[1], away: fair[2]);
+  }
+
   static BlendedMatch blend(SportsMatch match, TeamDirectory directory) {
     final marketP = match.market;
-    final market = ThreeWay(
-      home: marketP.fair[0],
-      draw: marketP.fair[1],
-      away: marketP.fair[2],
-    );
-    final home = directory.find(id: match.homeTeamId, name: match.home);
-    final away = directory.find(id: match.awayTeamId, name: match.away);
-    if (home == null || away == null) {
+    final market = threeWayFromMarket(match);
+    final soccer = match.sport == 'soccer' && match.hasDraw;
+    final home = soccer
+        ? directory.find(id: match.homeTeamId, name: match.home)
+        : null;
+    final away = soccer
+        ? directory.find(id: match.awayTeamId, name: match.away)
+        : null;
+    if (!soccer || home == null || away == null) {
       return BlendedMatch(
         market: marketP,
         model: null,

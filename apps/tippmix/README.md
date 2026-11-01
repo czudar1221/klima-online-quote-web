@@ -1,38 +1,31 @@
 # Tippmix kalkulátor
 
-Prémium Android-alkalmazás Flutterrel: meccsek, élő lista, előzmények és valószínűség-kalkulátor. A felhasználói felület **kizárólag magyar**.
+Egy magyar képernyő: mai/élő meccsek, 1/X/2 (vagy 1/2), kiemelt tipp, **esély a szorzóból**. Nem garancia. Nincs mintaadat.
 
-A százalékot **nem** nyelvi modell számolja. A motor tizedes szorzókból implikált valószínűséget képez, levonja az overroundot, keveri a kurált csapatmodellel (forma + kulcsemberek, 40% modell / 60% piac, ha van keret), majd szelvény/kombináció szerint pontos törtekkel számol. Képlet a kalkulátor képernyőn és a tervben. Nem garancia.
+A százalék a determinisztikus motorból jön (implikált valószínűség, árrés levétel). Szoros meccsen 45% is helyes.
 
 ## VS Code + Android
 
-1. Telepítsd: [Flutter](https://docs.flutter.dev/get-started/install), Android SDK / emulátor (vagy USB-s telefon), VS Code **Flutter** és **Dart** kiterjesztés.
-2. Nyisd meg ezt a mappát: `apps/tippmix/` (File → Open Folder). A repo gyökere a HVAC webes build; azt ne írd felül.
-3. Másold az `.env.example` fájlt `.env` névre, és töltsd ki az `OPENAI_API_KEY` sort, ha magyarázatot is kérsz. A `.env` gitignore-olt.
-4. Futtasd:
+1. Flutter + Android SDK, VS Code Flutter/Dart kiterjesztés.
+2. Nyisd meg `apps/tippmix/`. A repo gyökere a HVAC webes build — ne írd felül.
+3. Opcionális: `.env.example` → `.env`, `ODDS_API_KEY` (the-odds-api.com) a többi sporthoz.
 
 ```bash
 cd apps/tippmix
 flutter pub get
-flutter run --dart-define-from-file=.env
+flutter run
 ```
 
-VS Code: Run and Debug → **Tippmix (Android)**. Kulcs nélkül: **Tippmix (math only)** — a kalkulátor így is működik.
+Kulccsal: `flutter run --dart-define-from-file=.env`
 
-## Adat: mi valódi, mi minta
+## Élő adat
 
-- **Valódi:** a te szorzó-beviteled, a helyi előzmények, a matematikai motor.
-- **Kurált (nem élő):** csapaterő, forma, kulcsemberek — `lib/data/curated_squads.dart`, a UI-n „Kurált keret”.
-- **Minta (nem élő):** a beépített NB I / kupa meccsek és az „élő” percek/állások. Nincs hivatalos Tippmix-API bekötve.
-- Új forrás: implementáld a `MatchFeed` interfészt (`lib/data/match_feed.dart`), és add át az `AppController`nek. Ne scrapelj.
+- **Alap (kulcs nélkül):** ESPN nyilvános scoreboard JSON (nem HTML-scrapelés): labdarúgás, kosárlabda, jégkorong, amerikai foci, tenisz/baseball/MMA, ha van szorzó.
+- **Opcionális:** The Odds API (`ODDS_API_KEY`) — a forrás által listázott sportok h2h szorzói (tenisz, kézilabda, rögbi stb., ha aktív).
+- Hálózat nélkül: magyar hiba + Újra. Nincs minta-visszaállítás.
+- Nincs hivatalos Tippmix-feed. Nincs NB I az ESPN listáján.
 
-## OpenAI
-
-Opcionális, rövid magyar magyarázat a **már kiszámolt** számokhoz. A megjelenített `%` mindig a tesztelt motorból jön. Ha a hívás sikertelen, a kalkulátor offline marad.
-
-A kulcsot soha ne commitold. Ha a kulcs szerepelt csevegésben, cseréld (rotate), majd írd az újat a `.env` fájlba.
-
-## Teszt és analízis
+## Teszt
 
 ```bash
 cd apps/tippmix
