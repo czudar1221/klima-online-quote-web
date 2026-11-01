@@ -25,6 +25,9 @@ abstract final class Copy {
   static const profit = 'Nyereség';
   static const bestSlip = 'Mai szelvény';
   static const watchlist = 'Figyelőlista';
+  static const sportAll = 'Összes';
+  static const sportFilterEmpty =
+      'Ebben a sportban most nincs 50% feletti sor a figyelőlistán.';
   static const navForm = 'Forma';
   static const navAi = 'AI jegyzet';
   static const navChat = 'Chat';

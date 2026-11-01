@@ -43,6 +43,39 @@ void main() {
     expect(parseFormCode(null), isEmpty);
   });
 
+  test('forma név szerint, Odds-os csapatnévvel is', () {
+    final book = PatternBook();
+    book.addFinished(
+      'soccer',
+      FinishedResult(
+        homeId: '364',
+        awayId: '359',
+        homeName: 'Liverpool',
+        awayName: 'Arsenal',
+        homeScore: 2,
+        awayScore: 0,
+        kickoff: DateTime.utc(2026, 10, 26),
+        allowsDraw: true,
+      ),
+    );
+    final match = SportsMatch(
+      id: 'odds-1',
+      competition: 'EPL',
+      home: 'Liverpool FC',
+      away: 'Arsenal FC',
+      kickoff: DateTime(2026, 11, 1),
+      status: MatchStatus.upcoming,
+      homeOdds: Rational.parseDecimal('1,80'),
+      drawOdds: Rational.parseDecimal('3,50'),
+      awayOdds: Rational.parseDecimal('4,50'),
+      sport: 'soccer',
+      sportLabel: 'Labdarúgás',
+    );
+    final snap = book.snapshot(match);
+    expect(snap.bothForm, isTrue);
+    expect(snap.signal, PatternSignal.form);
+  });
+
   test('ha nincs forma, λ=0, csak szorzó, nem kitalált történelem', () {
     final match = _nba(id: '1', homeForm: '', awayForm: '');
     final snap = PatternBook().snapshot(match);

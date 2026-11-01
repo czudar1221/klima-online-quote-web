@@ -5,6 +5,7 @@ import 'models.dart';
 import 'odds_api_config.dart';
 import 'odds_api_feed.dart';
 import 'pattern_book.dart';
+import 'team_names.dart';
 
 /// Default live feed: ESPN scoreboards (form / results) plus The Odds API prices.
 class LiveSportsFeed implements MatchFeed {
@@ -70,38 +71,66 @@ List<SportsMatch> mergeEspnFormWithOdds(
   List<SportsMatch> espn,
   List<SportsMatch> odds,
 ) {
-  final usedOdds = <int>{};
+  if (odds.isEmpty) {
+    return espn.where((m) => m.hasValidOdds && !m.isSample).toList();
+  }
+  final usedEspn = <int>{};
   final out = <SportsMatch>[];
-  for (final e in espn) {
-    var merged = e;
-    for (var i = 0; i < odds.length; i++) {
-      if (usedOdds.contains(i)) continue;
-      if (!_sameFixture(e, odds[i])) continue;
-      usedOdds.add(i);
-      final o = odds[i];
-      merged = e.copyWith(
-        homeOdds: o.homeOdds,
-        awayOdds: o.awayOdds,
-        drawOdds: o.drawOdds,
-        clearDrawOdds: o.drawOdds == null,
-      );
+  for (final o in odds) {
+    var merged = o;
+    for (var i = 0; i < espn.length; i++) {
+      if (usedEspn.contains(i)) continue;
+      final e = espn[i];
+      final link = fixtureNameLink(e, o);
+      if (link == FixtureLink.none) continue;
+      usedEspn.add(i);
+      merged = _attachEspnForm(o, e, reversed: link == FixtureLink.reversed);
       break;
     }
     out.add(merged);
   }
-  for (var i = 0; i < odds.length; i++) {
-    if (!usedOdds.contains(i)) out.add(odds[i]);
+  for (var i = 0; i < espn.length; i++) {
+    if (usedEspn.contains(i) || !espn[i].hasValidOdds) continue;
+    out.add(espn[i]);
   }
   return out.where((m) => m.hasValidOdds && !m.isSample).toList();
 }
 
-bool _sameFixture(SportsMatch a, SportsMatch b) {
-  if (a.sport != b.sport) return false;
-  if (_fold(a.home) != _fold(b.home) || _fold(a.away) != _fold(b.away)) {
-    return false;
+enum FixtureLink { none, same, reversed }
+
+FixtureLink fixtureNameLink(SportsMatch espn, SportsMatch odds) {
+  if (!fixturesLooselyMatch(
+    sportA: espn.sport,
+    homeA: espn.home,
+    awayA: espn.away,
+    kickoffA: espn.kickoff,
+    sportB: odds.sport,
+    homeB: odds.home,
+    awayB: odds.away,
+    kickoffB: odds.kickoff,
+  )) {
+    return FixtureLink.none;
   }
-  return a.kickoff.difference(b.kickoff).abs() <= const Duration(hours: 18);
+  final same =
+      namesLooselyEqual(espn.home, odds.home) &&
+      namesLooselyEqual(espn.away, odds.away);
+  return same ? FixtureLink.same : FixtureLink.reversed;
 }
 
-String _fold(String name) =>
-    name.toLowerCase().replaceAll(RegExp(r'[^a-z0-9]'), '');
+SportsMatch _attachEspnForm(
+  SportsMatch odds,
+  SportsMatch espn, {
+  required bool reversed,
+}) {
+  return odds.copyWith(
+    status: espn.status,
+    minute: espn.minute,
+    homeScore: reversed ? espn.awayScore : espn.homeScore,
+    awayScore: reversed ? espn.homeScore : espn.awayScore,
+    homeTeamId: reversed ? espn.awayTeamId : espn.homeTeamId,
+    awayTeamId: reversed ? espn.homeTeamId : espn.awayTeamId,
+    leagueKey: espn.leagueKey,
+    homeFormCode: reversed ? espn.awayFormCode : espn.homeFormCode,
+    awayFormCode: reversed ? espn.homeFormCode : espn.awayFormCode,
+  );
+}

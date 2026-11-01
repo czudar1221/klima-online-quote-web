@@ -40,6 +40,20 @@ class _FakeFeed implements MatchFeed {
       sport: 'basketball',
       sportLabel: 'Kosárlabda',
     ),
+    SportsMatch(
+      id: 's1',
+      competition: 'EPL',
+      home: 'Liverpool',
+      away: 'Arsenal',
+      kickoff: DateTime(2026, 11, 1, 3),
+      status: MatchStatus.upcoming,
+      homeOdds: Rational.parseDecimal('1,35'),
+      drawOdds: Rational.parseDecimal('5,00'),
+      awayOdds: Rational.parseDecimal('8,50'),
+      isSample: false,
+      sport: 'soccer',
+      sportLabel: 'Labdarúgás',
+    ),
   ];
 
   @override
@@ -59,7 +73,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(Copy.bestSlip), findsWidgets);
-    expect(find.textContaining('2 meccs · 1 élő · 2 tipp 50% felett'), findsOneWidget);
+    expect(find.textContaining('3 meccs · 1 élő · 3 tipp 50% felett'), findsOneWidget);
     expect(find.byKey(const Key('stakeFt')), findsOneWidget);
     expect(controller.stake, defaultStrategyStake);
     expect(find.text('Minta meccs'), findsNothing);
@@ -77,6 +91,20 @@ void main() {
     expect(find.text(Copy.notABet), findsOneWidget);
     expect(find.textContaining('Lakers'), findsWidgets);
     expect(find.textContaining(formatHuf(Rational.fromInt(8500))), findsWidgets);
+    expect(find.byKey(const Key('sport-all')), findsOneWidget);
+    expect(find.byKey(const Key('sport-basketball')), findsOneWidget);
+    expect(find.byKey(const Key('sport-soccer')), findsOneWidget);
+    expect(find.textContaining('Liverpool'), findsWidgets);
+
+    await tester.tap(find.byKey(const Key('sport-soccer')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Liverpool'), findsWidgets);
+    expect(find.textContaining('Lakers'), findsNothing);
+    expect(controller.board.watchlist.length, 3);
+
+    await tester.tap(find.byKey(const Key('sport-all')));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('Lakers'), findsWidgets);
     expect(find.text(Copy.chartTitle), findsNothing);
     expect(find.byKey(const Key('matchChart')), findsNothing);
 

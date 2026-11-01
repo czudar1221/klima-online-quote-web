@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../data/models.dart';
+import '../data/sport_catalog.dart';
 import '../engine/strongest_pick.dart';
 import '../l10n/copy.dart';
 import '../state/app_controller.dart';
@@ -95,6 +96,11 @@ class _WatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final board = controller.board;
+    final sports = _sportsInLiveList(controller.matches);
+    final key = controller.watchSportKey;
+    final rows = key == null
+        ? board.watchlist
+        : board.watchlist.where((p) => p.match.sport == key).toList();
     return ListView(
       padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
       children: [
@@ -116,11 +122,38 @@ class _WatchPage extends StatelessWidget {
           Copy.formulaChecked,
           style: TextStyle(color: AppColors.muted, height: 1.4, fontSize: 13),
         ),
+        if (sports.isNotEmpty) ...[
+          const SizedBox(height: 14),
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            children: [
+              _SportChip(
+                id: 'all',
+                label: Copy.sportAll,
+                selected: key == null,
+                onTap: () => controller.setWatchSport(null),
+              ),
+              for (final sport in sports)
+                _SportChip(
+                  id: sport.key,
+                  label: sport.label,
+                  selected: key == sport.key,
+                  onTap: () => controller.setWatchSport(sport.key),
+                ),
+            ],
+          ),
+        ],
         const SizedBox(height: 16),
         if (board.watchlist.isEmpty)
           const Text(Copy.noStrategy, style: TextStyle(color: AppColors.muted))
+        else if (rows.isEmpty)
+          const Text(
+            Copy.sportFilterEmpty,
+            style: TextStyle(color: AppColors.muted),
+          )
         else
-          ...board.watchlist.map(
+          ...rows.map(
             (p) => Padding(
               padding: const EdgeInsets.only(bottom: 10),
               child: WatchRow(
@@ -133,6 +166,53 @@ class _WatchPage extends StatelessWidget {
       ],
     );
   }
+}
+
+class _SportChip extends StatelessWidget {
+  const _SportChip({
+    required this.id,
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String id;
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return ChoiceChip(
+      key: Key('sport-$id'),
+      label: Text(label),
+      selected: selected,
+      onSelected: (_) => onTap(),
+      selectedColor: AppColors.navy,
+      backgroundColor: Colors.white,
+      side: const BorderSide(color: AppColors.navy),
+      labelStyle: TextStyle(
+        color: selected ? Colors.white : AppColors.navy,
+        fontWeight: FontWeight.w700,
+        fontSize: 13,
+      ),
+      showCheckmark: false,
+    );
+  }
+}
+
+List<({String key, String label})> _sportsInLiveList(List<SportsMatch> matches) {
+  final map = <String, String>{};
+  for (final m in matches) {
+    map.putIfAbsent(
+      m.sport,
+      () => m.sportLabel.isNotEmpty ? m.sportLabel : sportLabelHu(m.sport),
+    );
+  }
+  final out = [
+    for (final e in map.entries) (key: e.key, label: e.value),
+  ]..sort((a, b) => a.label.toLowerCase().compareTo(b.label.toLowerCase()));
+  return out;
 }
 
 class _FormPage extends StatelessWidget {

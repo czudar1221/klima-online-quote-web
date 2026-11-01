@@ -101,6 +101,44 @@ void main() {
     expect(game.resultFor('357'), FormResult.loss);
   });
 
+  test('közelgő meccs formával, ESPN szorzó nélkül is megmarad', () {
+    final event = {
+      'id': '77',
+      'date': '2026-11-01T16:30:00Z',
+      'status': {
+        'type': {'state': 'pre'},
+      },
+      'competitions': [
+        {
+          'date': '2026-11-01T16:30:00Z',
+          'competitors': [
+            {
+              'homeAway': 'home',
+              'form': 'WWDLW',
+              'team': {'id': '364', 'displayName': 'Liverpool'},
+            },
+            {
+              'homeAway': 'away',
+              'form': 'DLDWW',
+              'team': {'id': '359', 'displayName': 'Arsenal'},
+            },
+          ],
+        },
+      ],
+    };
+    final match = EspnLiveFeed.parseEvent(
+      event,
+      sport: 'soccer',
+      competition: 'Premier League',
+      league: 'eng.1',
+    );
+    expect(match, isNotNull);
+    expect(match!.hasValidOdds, isFalse);
+    expect(match.homeFormCode, 'WWDLW');
+    expect(match.homeTeamId, '364');
+    expect(match.leagueKey, 'soccer/eng.1');
+  });
+
   test('lejátszott meccs kimarad', () {
     final event = {
       'id': '2',

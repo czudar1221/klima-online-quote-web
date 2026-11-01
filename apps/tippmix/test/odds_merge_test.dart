@@ -67,6 +67,37 @@ void main() {
     expect(match.drawOdds, Rational.parseDecimal('3.4'));
   });
 
+  test('laza név: Man Utd + Bayern München is ESPN formát kap', () {
+    final kickoff = DateTime.utc(2026, 11, 1, 16, 30);
+    final espn = [
+      _espn(
+        home: 'Manchester United',
+        away: 'FC Bayern München',
+        kickoff: kickoff,
+      ).copyWith(homeFormCode: 'WLWWD', awayFormCode: 'WWWWW'),
+    ];
+    final odds = SportsMatch(
+      id: 'odds-loose',
+      competition: 'UCL',
+      home: 'Man Utd',
+      away: 'Bayern Munich',
+      kickoff: kickoff.add(const Duration(hours: 20)),
+      status: MatchStatus.upcoming,
+      homeOdds: Rational.parseDecimal('2.90'),
+      drawOdds: Rational.parseDecimal('3.40'),
+      awayOdds: Rational.parseDecimal('2.40'),
+      sport: 'soccer',
+      sportLabel: 'Labdarúgás',
+    );
+    final merged = mergeEspnFormWithOdds(espn, [odds]);
+    expect(merged, hasLength(1));
+    expect(merged.single.homeFormCode, 'WLWWD');
+    expect(merged.single.awayFormCode, 'WWWWW');
+    expect(merged.single.homeTeamId, '364');
+    expect(merged.single.leagueKey, 'soccer/eng.1');
+    expect(merged.single.homeOdds, Rational.parseDecimal('2.90'));
+  });
+
   test('összefésülés: Odds API szorzó, ESPN forma és csapat-id', () {
     final kickoff = DateTime.utc(2026, 11, 1, 16, 30);
     final espn = _espn(home: 'Liverpool', away: 'Arsenal', kickoff: kickoff);
@@ -90,6 +121,6 @@ void main() {
     expect(merged.single.homeTeamId, '364');
     expect(merged.single.homeFormCode, 'DWWWW');
     expect(merged.single.leagueKey, 'soccer/eng.1');
-    expect(merged.single.id, 'espn-1');
+    expect(merged.single.id, 'odds-1');
   });
 }

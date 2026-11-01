@@ -1,6 +1,6 @@
 # Tippmix kalkulátor
 
-Magyar kereskedőasztal alsó menüvel: Mai szelvény, Figyelőlista, Forma, AI jegyzet, Chat. Szerkeszthető Ft tét. Meccssor koppintásra nyílik: 1/X/2 diagram + forma. Logo: zöld emelkedő chart a TIPPMIX előtt (launcher + splash töltősáv). **Esély a tört-számításból**, az AI nem írja felül. Nincs mintaadat.
+Magyar kereskedőasztal alsó menüvel: Mai szelvény, Figyelőlista, Forma, AI jegyzet, Chat. Szerkeszthető Ft tét. Meccssor koppintásra nyílik: 1/X/2 diagram + forma. Figyelőlista sportszűrő: Összes + élő sportok. Logo: zöld emelkedő chart a TIPPMIX előtt (launcher + splash töltősáv). **Esély a tört-számításból**, az AI nem írja felül. Nincs mintaadat.
 
 ## VS Code + Android
 

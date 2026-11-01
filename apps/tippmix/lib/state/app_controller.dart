@@ -46,6 +46,13 @@ class AppController extends ChangeNotifier {
   final List<ChatTurn> chat = [];
   bool chatBusy = false;
   String? chatError;
+  String? watchSportKey;
+
+  void setWatchSport(String? key) {
+    if (watchSportKey == key) return;
+    watchSportKey = key;
+    notifyListeners();
+  }
 
   void setStakeInput(String raw) {
     final parsed = parseStakeHuf(raw);
@@ -120,6 +127,10 @@ class AppController extends ChangeNotifier {
         for (final m in list)
           if (seen.add(m.id) && !m.isSample) m,
       ];
+      if (watchSportKey != null &&
+          !matches.any((m) => m.sport == watchSportKey)) {
+        watchSportKey = null;
+      }
     } on FeedException {
       matches = [];
       error = Copy.errorNetwork;

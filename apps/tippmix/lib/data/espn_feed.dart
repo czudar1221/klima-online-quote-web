@@ -95,13 +95,15 @@ class EspnLiveFeed {
   Future<PatternBook> fetchPatterns(List<SportsMatch> live) async {
     final book = PatternBook();
     final leagues = <String>{};
+    final liveSports = {for (final m in live) m.sport};
     for (final m in live) {
       final key = m.leagueKey;
-      if (key == null || !key.contains('/')) continue;
-      final hasForm =
-          parseFormCode(m.homeFormCode).isNotEmpty &&
-          parseFormCode(m.awayFormCode).isNotEmpty;
-      if (!hasForm) leagues.add(key);
+      if (key != null && key.contains('/')) leagues.add(key);
+    }
+    for (final board in boards) {
+      if (liveSports.contains(board.sport)) {
+        leagues.add('${board.sport}/${board.league}');
+      }
     }
     final now = _now ?? DateTime.now().toUtc();
     for (final key in leagues) {
@@ -174,7 +176,9 @@ class EspnLiveFeed {
         name: teamName,
         sport: sport,
       );
+      final byName = PatternBook.nameKey(sport: sport, name: teamName);
       book.injuryKnownTeams.add(key);
+      book.injuryKnownTeams.add(byName);
       final items = group['injuries'];
       if (items is! List) continue;
       final players = <PlayerProfile>[];
@@ -197,6 +201,7 @@ class EspnLiveFeed {
         );
       }
       book.injuriesByTeam[key] = players;
+      book.injuriesByTeam[byName] = players;
     }
   }
 
@@ -339,17 +344,16 @@ class EspnLiveFeed {
     if (home == null || away == null) return null;
 
     final oddsList = comp['odds'];
-    if (oddsList is! List || oddsList.isEmpty) return null;
     Map<String, dynamic>? odds;
-    for (final item in oddsList) {
-      if (item is Map<String, dynamic>) {
-        odds = item;
-        break;
+    if (oddsList is List) {
+      for (final item in oddsList) {
+        if (item is Map<String, dynamic>) {
+          odds = item;
+          break;
+        }
       }
     }
-    if (odds == null) return null;
-    final lines = _extractLines(odds);
-    if (lines == null) return null;
+    final lines = odds == null ? null : _extractLines(odds);
 
     final statusNode = (event['status'] as Map?)?['type'] as Map? ?? {};
     final state = statusNode['state'] as String? ?? 'pre';
@@ -402,9 +406,9 @@ class EspnLiveFeed {
       minute: status == MatchStatus.live ? minute : null,
       homeScore: status == MatchStatus.live ? scoreOf(home) : null,
       awayScore: status == MatchStatus.live ? scoreOf(away) : null,
-      homeOdds: lines.home,
-      drawOdds: lines.draw,
-      awayOdds: lines.away,
+      homeOdds: lines?.home ?? Rational.one,
+      drawOdds: lines?.draw,
+      awayOdds: lines?.away ?? Rational.one,
       isSample: false,
       sport: sport,
       sportLabel: sportLabelHu(sport),

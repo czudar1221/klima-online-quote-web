@@ -2,6 +2,7 @@ import '../engine/rational.dart';
 import '../l10n/copy.dart';
 import 'models.dart';
 import 'squad.dart';
+import 'team_names.dart';
 
 enum PatternSignal { oddsOnly, form, absence, formAndAbsence }
 
@@ -139,8 +140,11 @@ class PatternBook {
 
   static String teamKey({String? id, required String name, required String sport}) {
     if (id != null && id.isNotEmpty) return '$sport#$id';
-    return '$sport#${name.trim().toLowerCase()}';
+    return nameKey(sport: sport, name: name);
   }
+
+  static String nameKey({required String sport, required String name}) =>
+      '$sport#${canonicalTeamName(name)}';
 
   void addForm(String key, List<FormResult> form) {
     if (form.isEmpty) return;
@@ -150,16 +154,55 @@ class PatternBook {
 
   void addFinished(String sport, FinishedResult game) {
     void apply(String id, String name) {
-      final key = teamKey(id: id, name: name, sport: sport);
+      final byId = teamKey(id: id, name: name, sport: sport);
+      final byName = nameKey(sport: sport, name: name);
       final next = [
-        ...?formByTeam[key],
+        ...?formByTeam[byId] ?? formByTeam[byName],
         game.resultFor(id),
       ];
-      addForm(key, next);
+      addForm(byId, next);
+      addForm(byName, next);
     }
 
     apply(game.homeId, game.homeName);
     apply(game.awayId, game.awayName);
+  }
+
+  List<FormResult> _formFor({
+    String? id,
+    required String name,
+    required String sport,
+    String? code,
+  }) {
+    final fromCode = parseFormCode(code);
+    if (fromCode.isNotEmpty) return fromCode;
+    final byId = id == null || id.isEmpty
+        ? null
+        : formByTeam[teamKey(id: id, name: name, sport: sport)];
+    if (byId != null && byId.isNotEmpty) return byId;
+    return formByTeam[nameKey(sport: sport, name: name)] ?? const [];
+  }
+
+  bool _injuryKnown({String? id, required String name, required String sport}) {
+    if (id != null &&
+        id.isNotEmpty &&
+        injuryKnownTeams.contains(teamKey(id: id, name: name, sport: sport))) {
+      return true;
+    }
+    return injuryKnownTeams.contains(nameKey(sport: sport, name: name));
+  }
+
+  List<PlayerProfile> _injuries({
+    String? id,
+    required String name,
+    required String sport,
+  }) {
+    if (id != null && id.isNotEmpty) {
+      final byId = injuriesByTeam[teamKey(id: id, name: name, sport: sport)];
+      if (byId != null) return byId;
+    }
+    return injuriesByTeam[nameKey(sport: sport, name: name)] ??
+        const <PlayerProfile>[];
   }
 
   PatternSnapshot snapshot(SportsMatch match) {
@@ -173,14 +216,38 @@ class PatternBook {
       name: match.away,
       sport: match.sport,
     );
-    var homeForm = parseFormCode(match.homeFormCode);
-    var awayForm = parseFormCode(match.awayFormCode);
-    if (homeForm.isEmpty) homeForm = formByTeam[homeKey] ?? const [];
-    if (awayForm.isEmpty) awayForm = formByTeam[awayKey] ?? const [];
-    final homeKnown = injuryKnownTeams.contains(homeKey);
-    final awayKnown = injuryKnownTeams.contains(awayKey);
-    final homeInj = injuriesByTeam[homeKey] ?? const <PlayerProfile>[];
-    final awayInj = injuriesByTeam[awayKey] ?? const <PlayerProfile>[];
+    final homeForm = _formFor(
+      id: match.homeTeamId,
+      name: match.home,
+      sport: match.sport,
+      code: match.homeFormCode,
+    );
+    final awayForm = _formFor(
+      id: match.awayTeamId,
+      name: match.away,
+      sport: match.sport,
+      code: match.awayFormCode,
+    );
+    final homeKnown = _injuryKnown(
+      id: match.homeTeamId,
+      name: match.home,
+      sport: match.sport,
+    );
+    final awayKnown = _injuryKnown(
+      id: match.awayTeamId,
+      name: match.away,
+      sport: match.sport,
+    );
+    final homeInj = _injuries(
+      id: match.homeTeamId,
+      name: match.home,
+      sport: match.sport,
+    );
+    final awayInj = _injuries(
+      id: match.awayTeamId,
+      name: match.away,
+      sport: match.sport,
+    );
     TeamProfile? profile({
       required String id,
       required String name,
