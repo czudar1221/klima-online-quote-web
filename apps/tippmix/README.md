@@ -1,6 +1,6 @@
 # Tippmix kalkulátor
 
-Magyar kereskedőasztal: mai szelvény (50%+ esély, szorzó szerint), 50 000 Ft tét/visszajáró/nyereség, alatta figyelőlista. **Esély a szorzóból**, nem garancia, nem valós tét. Nincs mintaadat.
+Magyar kereskedőasztal: mai szelvény (50%+ esély, szorzó szerint), szerkeszthető Ft tét (alap 50 000), visszajáró/nyereség, alatta figyelőlista. **Esély a szorzóból**, nem garancia, nem valós tét. Nincs mintaadat.
 
 ## VS Code + Android
 

@@ -25,6 +25,14 @@ class AppController extends ChangeNotifier {
   List<SportsMatch> matches = [];
   bool loading = true;
   String? error;
+  Rational stake = defaultStrategyStake;
+
+  void setStakeInput(String raw) {
+    final parsed = parseStakeHuf(raw);
+    if (parsed == null || parsed == stake) return;
+    stake = parsed;
+    notifyListeners();
+  }
 
   BlendedMatch blendedFor(SportsMatch match) =>
       StrengthModel.blend(match, squads);
@@ -32,7 +40,8 @@ class AppController extends ChangeNotifier {
   StrongestPick pickFor(SportsMatch match) =>
       strongestPick(blendedFor(match), hasDraw: match.hasDraw);
 
-  StrategyBoard get board => buildStrategy(matches, blendedFor);
+  StrategyBoard get board =>
+      buildStrategy(matches, blendedFor, stake: stake);
 
   String whyFor(SportsMatch match) {
     final pick = pickFor(match);

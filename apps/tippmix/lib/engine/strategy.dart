@@ -4,8 +4,22 @@ import 'rational.dart';
 import 'strength.dart';
 import 'strongest_pick.dart';
 
-final strategyStake = Rational.fromInt(50000);
+final defaultStrategyStake = Rational.fromInt(50000);
 final _half = Rational(BigInt.one, BigInt.two);
+
+/// Digits-only forint amount. Spaces and "Ft" are ignored. Null if empty or ≤ 0.
+Rational? parseStakeHuf(String raw) {
+  final digits = StringBuffer();
+  for (final unit in raw.runes) {
+    if (unit >= 0x30 && unit <= 0x39) {
+      digits.writeCharCode(unit);
+    }
+  }
+  if (digits.isEmpty) return null;
+  final n = BigInt.parse(digits.toString());
+  if (n <= BigInt.zero) return null;
+  return Rational(n);
+}
 
 class StrategyPick {
   final SportsMatch match;
@@ -20,19 +34,21 @@ class StrategyPick {
     required this.odds,
   });
 
-  Rational get payout => strategyStake * odds;
-  Rational get profit => strategyStake * (odds - Rational.one);
+  Rational payoutOn(Rational stake) => stake * odds;
+  Rational profitOn(Rational stake) => stake * (odds - Rational.one);
 }
 
 class StrategyBoard {
   final List<StrategyPick> watchlist;
   final List<StrategyPick> slip;
+  final Rational stake;
   final int liveMatchCount;
   final int matchCount;
 
   const StrategyBoard({
     required this.watchlist,
     required this.slip,
+    required this.stake,
     required this.liveMatchCount,
     required this.matchCount,
   });
@@ -48,9 +64,9 @@ class StrategyBoard {
   Rational get combinedOdds =>
       slip.fold(Rational.one, (a, p) => a * p.odds);
 
-  Rational get slipPayout => strategyStake * combinedOdds;
+  Rational get slipPayout => stake * combinedOdds;
 
-  Rational get slipProfit => slipPayout - strategyStake;
+  Rational get slipProfit => slipPayout - stake;
 }
 
 /// Picks with exact P* > 1/2, ranked by decimal odds (profit), not by %.
@@ -58,8 +74,12 @@ class StrategyBoard {
 /// or [Rational.toDouble]. Slip: greedy add while the product stays > 1/2, at most 4 legs.
 StrategyBoard buildStrategy(
   List<SportsMatch> matches,
-  BlendedMatch Function(SportsMatch) blend,
-) {
+  BlendedMatch Function(SportsMatch) blend, {
+  Rational? stake,
+}) {
+  final usedStake = (stake != null && stake > Rational.zero)
+      ? stake
+      : defaultStrategyStake;
   final candidates = <StrategyPick>[];
   for (final match in matches) {
     if (match.isSample) continue;
@@ -94,6 +114,7 @@ StrategyBoard buildStrategy(
   return StrategyBoard(
     watchlist: List.unmodifiable(candidates),
     slip: List.unmodifiable(slip),
+    stake: usedStake,
     liveMatchCount: matches.where((m) => m.status == MatchStatus.live).length,
     matchCount: matches.length,
   );

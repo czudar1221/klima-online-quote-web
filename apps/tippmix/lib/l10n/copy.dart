@@ -15,6 +15,9 @@ abstract final class Copy {
   static const vs = '–';
   static const minute = 'perc';
   static const stake = 'Tét';
+  static const stakeFt = 'Tét (Ft)';
+  static const stakeHint =
+      'Írd be a tétet forintban. A szelvény és a lista nyeresége ehhez igazodik.';
   static const combinedOdds = 'Szelvény szorzó';
   static const combinedChance = 'Együttes esély';
   static const payout = 'Visszajáró';

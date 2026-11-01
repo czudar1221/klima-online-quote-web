@@ -49,8 +49,8 @@ SportsMatch _soccer({
   );
 }
 
-StrategyBoard _board(List<SportsMatch> matches) =>
-    buildStrategy(matches, (m) => StrengthModel.blend(m, _empty));
+StrategyBoard _board(List<SportsMatch> matches, {Rational? stake}) =>
+    buildStrategy(matches, (m) => StrengthModel.blend(m, _empty), stake: stake);
 
 void main() {
   test('szűrő: csak pontos P* > 1/2, a 2,00/2,00 (pontosan 1/2) kiesik', () {
@@ -154,8 +154,19 @@ void main() {
       board.combinedOdds,
       Rational(BigInt.from(125), BigInt.from(64)),
     );
-    expect(board.slipPayout, strategyStake * board.combinedOdds);
-    expect(board.slipProfit, board.slipPayout - strategyStake);
+    expect(board.slipPayout, defaultStrategyStake * board.combinedOdds);
+    expect(board.slipProfit, board.slipPayout - defaultStrategyStake);
+    expect(board.stake, defaultStrategyStake);
+
+    final doubled = _board(matches, stake: Rational.fromInt(100000));
+    expect(doubled.slip.length, board.slip.length);
+    expect(doubled.slipPayout, Rational.fromInt(2) * board.slipPayout);
+    expect(doubled.slipProfit, Rational.fromInt(2) * board.slipProfit);
+    expect(
+      doubled.watchlist.first.profitOn(doubled.stake),
+      Rational.fromInt(2) *
+          board.watchlist.first.profitOn(board.stake),
+    );
     expect(board.bestSingle, board.watchlist.first);
   });
 
@@ -187,6 +198,15 @@ void main() {
     expect(board.watchlist.single.chance, fairHome);
     expect(board.watchlist.single.chance, isNot(Rational.parseDecimal('0.56')));
     expect(fairHome.n * BigInt.two > fairHome.d, isTrue);
+  });
+
+  test('tét beolvasás: szóköz és Ft, üres/0 érvénytelen', () {
+    expect(parseStakeHuf('50000'), defaultStrategyStake);
+    expect(parseStakeHuf('50 000 Ft'), defaultStrategyStake);
+    expect(parseStakeHuf('10\u00a0000'), Rational.fromInt(10000));
+    expect(parseStakeHuf(''), isNull);
+    expect(parseStakeHuf('0'), isNull);
+    expect(parseStakeHuf('abc'), isNull);
   });
 
   test('élő számláló', () {

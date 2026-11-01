@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
+import '../engine/rational.dart';
 import '../engine/strategy.dart';
 import '../engine/strongest_pick.dart';
 import '../l10n/copy.dart';
@@ -38,6 +40,7 @@ class HomeScreen extends StatelessWidget {
             return RefreshIndicator(
               onRefresh: controller.load,
               child: ListView(
+                key: const Key('boardList'),
                 padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
                 children: [
                   const Text(
@@ -77,6 +80,8 @@ class HomeScreen extends StatelessWidget {
                     style: TextStyle(color: AppColors.muted, height: 1.4),
                   ),
                   const SizedBox(height: 16),
+                  _StakeCard(controller: controller),
+                  const SizedBox(height: 16),
                   _SlipCard(board: board),
                   const SizedBox(height: 20),
                   const Text(
@@ -102,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                     ...board.watchlist.map(
                       (p) => Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: _WatchRow(pick: p),
+                        child: _WatchRow(pick: p, stake: board.stake),
                       ),
                     ),
                   const SizedBox(height: 12),
@@ -118,6 +123,79 @@ class HomeScreen extends StatelessWidget {
               ),
             );
           },
+        ),
+      ),
+    );
+  }
+}
+
+class _StakeCard extends StatefulWidget {
+  const _StakeCard({required this.controller});
+  final AppController controller;
+
+  @override
+  State<_StakeCard> createState() => _StakeCardState();
+}
+
+class _StakeCardState extends State<_StakeCard> {
+  late final TextEditingController _text;
+
+  @override
+  void initState() {
+    super.initState();
+    final n = widget.controller.stake.n;
+    _text = TextEditingController(text: n.toString());
+  }
+
+  @override
+  void dispose() {
+    _text.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              Copy.stakeFt,
+              style: TextStyle(
+                fontWeight: FontWeight.w800,
+                color: AppColors.navy,
+              ),
+            ),
+            const SizedBox(height: 4),
+            const Text(
+              Copy.stakeHint,
+              style: TextStyle(color: AppColors.muted, fontSize: 13, height: 1.35),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              key: const Key('stakeFt'),
+              controller: _text,
+              keyboardType: TextInputType.number,
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(RegExp(r'[0-9 \u00a0]')),
+              ],
+              style: const TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 20,
+                color: AppColors.navy,
+              ),
+              decoration: const InputDecoration(
+                suffixText: 'Ft',
+                suffixStyle: TextStyle(
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.navy,
+                ),
+              ),
+              onChanged: widget.controller.setStakeInput,
+            ),
+          ],
         ),
       ),
     );
@@ -218,7 +296,7 @@ class _SlipCard extends StatelessWidget {
             ),
           ),
           const Divider(color: Colors.white24),
-          _kv(Copy.stake, formatHuf(strategyStake)),
+          _kv(Copy.stake, formatHuf(board.stake)),
           _kv(Copy.combinedOdds, board.combinedOdds.toDecimalString()),
           _kv(Copy.combinedChance, board.combinedChance.toPercentString()),
           _kv(Copy.payout, formatHuf(board.slipPayout)),
@@ -233,7 +311,7 @@ class _SlipCard extends StatelessWidget {
             Text(
               '${Copy.bestSingle}: ${outcomeLabel(board.bestSingle!.outcome)}  '
               '${board.bestSingle!.match.home} ${Copy.vs} ${board.bestSingle!.match.away}  ·  '
-              '${Copy.profit} ${formatHuf(board.bestSingle!.profit)}',
+              '${Copy.profit} ${formatHuf(board.bestSingle!.profitOn(board.stake))}',
               style: const TextStyle(color: Colors.white, height: 1.35),
             ),
           ],
@@ -289,8 +367,9 @@ class _Badge extends StatelessWidget {
 }
 
 class _WatchRow extends StatelessWidget {
-  const _WatchRow({required this.pick});
+  const _WatchRow({required this.pick, required this.stake});
   final StrategyPick pick;
+  final Rational stake;
 
   @override
   Widget build(BuildContext context) {
@@ -338,7 +417,7 @@ class _WatchRow extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '+${formatHuf(pick.profit)}',
+                  '+${formatHuf(pick.profitOn(stake))}',
                   style: const TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w600,
