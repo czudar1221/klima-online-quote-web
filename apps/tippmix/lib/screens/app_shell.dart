@@ -310,21 +310,16 @@ class _ChatPageState extends State<_ChatPage> {
                     margin: const EdgeInsets.only(bottom: 8),
                     padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
                     decoration: BoxDecoration(
-                      color: turn.role == 'user'
-                          ? AppColors.navy
-                          : AppColors.card,
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(14),
-                      border: turn.role == 'user'
-                          ? null
-                          : Border.all(color: AppColors.line),
+                      border: Border.all(color: AppColors.line),
                     ),
                     child: Text(
                       turn.text,
-                      style: TextStyle(
-                        color: turn.role == 'user'
-                            ? Colors.white
-                            : AppColors.ink,
+                      style: const TextStyle(
+                        color: Colors.black,
                         height: 1.4,
+                        fontSize: 15,
                       ),
                     ),
                   ),
@@ -340,8 +335,13 @@ class _ChatPageState extends State<_ChatPage> {
                 child: TextField(
                   key: const Key('chatInput'),
                   controller: _input,
+                  style: const TextStyle(color: Colors.black, fontSize: 16),
+                  cursorColor: Colors.black,
                   decoration: const InputDecoration(
                     hintText: Copy.chatTitle,
+                    hintStyle: TextStyle(color: Color(0xFF5C6B80)),
+                    filled: true,
+                    fillColor: Colors.white,
                   ),
                   onSubmitted: (_) => _send(),
                 ),
