@@ -16,6 +16,13 @@ void main() {
       expect(a + b, Rational.parseDecimal('0.3'));
       expect((a + b) * Rational.fromInt(10), Rational.fromInt(3));
     });
+
+    test('percent rounding is display-only and does not inflate the engine value', () {
+      final justUnderHalf = Rational(BigInt.from(499999), BigInt.from(1000000));
+      expect(justUnderHalf <= Rational(BigInt.one, BigInt.two), isTrue);
+      expect(justUnderHalf.toPercentString(), '50,00%');
+      expect(justUnderHalf.toDouble(), isNot(0.5));
+    });
   });
 
   group('implied odds and overround', () {

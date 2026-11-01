@@ -1,14 +1,18 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tippmix_kalkulator/data/models.dart';
 import 'package:tippmix_kalkulator/data/squad.dart';
+import 'package:tippmix_kalkulator/engine/probability.dart';
 import 'package:tippmix_kalkulator/engine/rational.dart';
 import 'package:tippmix_kalkulator/engine/strategy.dart';
 import 'package:tippmix_kalkulator/engine/strength.dart';
 
-SportsMatch _m({
+final _half = Rational(BigInt.one, BigInt.two);
+final _empty = TeamDirectory([]);
+
+SportsMatch _twoWay({
   required String id,
-  required String homeOdds,
-  required String awayOdds,
+  required Rational homeOdds,
+  required Rational awayOdds,
   MatchStatus status = MatchStatus.upcoming,
 }) {
   return SportsMatch(
@@ -18,80 +22,187 @@ SportsMatch _m({
     away: 'A$id',
     kickoff: DateTime(2026, 11, 1),
     status: status,
-    homeOdds: Rational.parseDecimal(homeOdds),
-    awayOdds: Rational.parseDecimal(awayOdds),
+    homeOdds: homeOdds,
+    awayOdds: awayOdds,
     sport: 'basketball',
     sportLabel: 'Kosárlabda',
   );
 }
 
-void main() {
-  final empty = TeamDirectory([]);
+SportsMatch _soccer({
+  required String id,
+  required String homeOdds,
+  required String drawOdds,
+  required String awayOdds,
+}) {
+  return SportsMatch(
+    id: id,
+    competition: 'NB',
+    home: 'A',
+    away: 'B',
+    kickoff: DateTime(2026, 11, 1),
+    status: MatchStatus.upcoming,
+    homeOdds: Rational.parseDecimal(homeOdds),
+    drawOdds: Rational.parseDecimal(drawOdds),
+    awayOdds: Rational.parseDecimal(awayOdds),
+    sport: 'soccer',
+  );
+}
 
-  test('csak 50% felett, rangsor szorzó szerint nem % szerint', () {
-    final longOdds = _m(id: 'a', homeOdds: '1,90', awayOdds: '2,00');
-    final shortOdds = _m(id: 'b', homeOdds: '1,40', awayOdds: '3,20');
-    final underHalf = _m(id: 'c', homeOdds: '2,00', awayOdds: '2,00');
-    final board = buildStrategy(
-      [shortOdds, longOdds, underHalf],
-      (m) => StrengthModel.blend(m, empty),
+StrategyBoard _board(List<SportsMatch> matches) =>
+    buildStrategy(matches, (m) => StrengthModel.blend(m, _empty));
+
+void main() {
+  test('szűrő: csak pontos P* > 1/2, a 2,00/2,00 (pontosan 1/2) kiesik', () {
+    final favorite = _twoWay(
+      id: 'fav',
+      homeOdds: Rational(BigInt.from(5), BigInt.from(4)),
+      awayOdds: Rational.fromInt(5),
     );
-    expect(board.watchlist.length, 2);
-    expect(board.watchlist.first.match.id, 'a');
-    expect(board.watchlist.last.match.id, 'b');
-    expect(
-      board.watchlist.first.odds > board.watchlist.last.odds,
-      isTrue,
+    final coin = _twoWay(
+      id: 'coin',
+      homeOdds: Rational.fromInt(2),
+      awayOdds: Rational.fromInt(2),
     );
+    final board = _board([favorite, coin]);
+    expect(board.watchlist.length, 1);
+    expect(board.watchlist.single.match.id, 'fav');
+    expect(board.watchlist.single.chance, Rational(BigInt.from(4), BigInt.from(5)));
+    expect(board.watchlist.single.chance > _half, isTrue);
     expect(
-      board.watchlist.first.chance < board.watchlist.last.chance,
-      isTrue,
+      StrengthModel.blend(coin, _empty).blended.home,
+      _half,
     );
   });
 
-  test('szelvény: termék > 50%, max 4, tét 50 000 Ft', () {
-    final matches = [
-      _m(id: '1', homeOdds: '1,18', awayOdds: '6,50'),
-      _m(id: '2', homeOdds: '1,16', awayOdds: '6,80'),
-      _m(id: '3', homeOdds: '1,14', awayOdds: '7,20'),
-      _m(id: '4', homeOdds: '1,12', awayOdds: '8,00'),
-      _m(id: '5', homeOdds: '1,10', awayOdds: '9,00'),
-    ];
-    final board = buildStrategy(
-      matches,
-      (m) => StrengthModel.blend(m, empty),
+  test('rangsor: nagyobb szorzó (profit) előre, nem a nagyobb %', () {
+    final shortPrice = _twoWay(
+      id: 'short',
+      homeOdds: Rational(BigInt.from(5), BigInt.from(4)),
+      awayOdds: Rational.fromInt(5),
     );
-    expect(board.slip.length, inInclusiveRange(1, 4));
-    expect(board.combinedChance > Rational(BigInt.one, BigInt.two), isTrue);
+    final longPrice = _twoWay(
+      id: 'long',
+      homeOdds: Rational(BigInt.from(5), BigInt.from(3)),
+      awayOdds: Rational(BigInt.from(5), BigInt.from(2)),
+    );
+    final board = _board([shortPrice, longPrice]);
+    expect(board.watchlist.map((p) => p.match.id).toList(), ['long', 'short']);
+    expect(board.watchlist[0].odds, Rational(BigInt.from(5), BigInt.from(3)));
+    expect(board.watchlist[0].chance, Rational(BigInt.from(3), BigInt.from(5)));
+    expect(board.watchlist[1].odds, Rational(BigInt.from(5), BigInt.from(4)));
+    expect(board.watchlist[1].chance, Rational(BigInt.from(4), BigInt.from(5)));
+    expect(board.watchlist[0].odds > board.watchlist[1].odds, isTrue);
+    expect(board.watchlist[0].chance < board.watchlist[1].chance, isTrue);
+    expect(
+      board.watchlist[0].chance * board.watchlist[1].chance < _half,
+      isTrue,
+    );
+    expect(board.slip.length, 1);
+    expect(board.slip.single.match.id, 'long');
+  });
+
+  test('szelvény megáll, mielőtt a szorzat 1/2-re vagy alá esne', () {
+    final twoThirds = _twoWay(
+      id: 'a',
+      homeOdds: Rational(BigInt.from(3), BigInt.from(2)),
+      awayOdds: Rational.fromInt(3),
+    );
+    final threeQuarters = _twoWay(
+      id: 'b',
+      homeOdds: Rational(BigInt.from(4), BigInt.from(3)),
+      awayOdds: Rational.fromInt(4),
+    );
+    final board = _board([threeQuarters, twoThirds]);
+    expect(board.watchlist.first.match.id, 'a');
+    expect(board.watchlist.first.chance, Rational(BigInt.from(2), BigInt.from(3)));
+    expect(board.watchlist.last.chance, Rational(BigInt.from(3), BigInt.from(4)));
+    expect(board.watchlist.first.chance * board.watchlist.last.chance, _half);
+    expect(board.slip.length, 1);
+    expect(board.slip.single.match.id, 'a');
+    expect(board.combinedChance, Rational(BigInt.from(2), BigInt.from(3)));
+    expect(board.combinedChance > _half, isTrue);
+  });
+
+  test('három 4/5-ös láb: szorzat 64/125 > 1/2, a negyedik (256/625) kimarad', () {
+    final matches = [
+      for (var i = 0; i < 4; i++)
+        _twoWay(
+          id: '$i',
+          homeOdds: Rational(BigInt.from(5), BigInt.from(4)),
+          awayOdds: Rational.fromInt(5),
+        ),
+    ];
+    final board = _board(matches);
+    expect(board.watchlist.length, 4);
+    expect(board.slip.length, 3);
+    expect(
+      board.combinedChance,
+      Rational(BigInt.from(64), BigInt.from(125)),
+    );
+    expect(board.combinedChance > _half, isTrue);
+    final fourLegs =
+        Rational(BigInt.from(256), BigInt.from(625));
+    expect(fourLegs <= _half, isTrue);
+    expect(
+      board.combinedChance,
+      IndependentEvents([
+        for (final p in board.slip) p.chance,
+      ]).accumulator,
+    );
+    expect(
+      board.combinedOdds,
+      Rational(BigInt.from(125), BigInt.from(64)),
+    );
     expect(board.slipPayout, strategyStake * board.combinedOdds);
     expect(board.slipProfit, board.slipPayout - strategyStake);
     expect(board.bestSingle, board.watchlist.first);
   });
 
-  test('ha a következő láb 50% alá vinné, megáll', () {
-    final a = _m(id: 'hi', homeOdds: '1,80', awayOdds: '2,10');
-    final b = _m(id: 'lo', homeOdds: '1,85', awayOdds: '2,05');
-    final board = buildStrategy([a, b], (m) => StrengthModel.blend(m, empty));
-    for (final p in board.watchlist) {
-      expect(p.chance > Rational(BigInt.one, BigInt.two), isTrue);
-    }
-    if (board.watchlist.length >= 2) {
-      final productIfTwo =
-          board.watchlist[0].chance * board.watchlist[1].chance;
-      if (productIfTwo <= Rational(BigInt.one, BigInt.two)) {
-        expect(board.slip.length, 1);
-      }
-    }
+  test('1X2 45% körüli max nem kerül a listára és nem inflálódik', () {
+    final tight = _soccer(
+      id: 'tight',
+      homeOdds: '2,20',
+      drawOdds: '3,20',
+      awayOdds: '3,40',
+    );
+    final market = tight.market;
+    expect(market.fair.reduce((a, b) => a > b ? a : b) < _half, isTrue);
+    final board = _board([tight]);
+    expect(board.watchlist, isEmpty);
+    expect(board.slip, isEmpty);
+    final top = market.fair[0];
+    expect(top < _half, isTrue);
+    expect(top.toPercentString().startsWith('50'), isFalse);
+  });
+
+  test('esély a de-vigelt tört, nem kerekített százalék', () {
+    final match = _twoWay(
+      id: 'exact',
+      homeOdds: Rational.parseDecimal('1,80'),
+      awayOdds: Rational.parseDecimal('2,10'),
+    );
+    final board = _board([match]);
+    final fairHome = match.market.fair[0];
+    expect(board.watchlist.single.chance, fairHome);
+    expect(board.watchlist.single.chance, isNot(Rational.parseDecimal('0.56')));
+    expect(fairHome.n * BigInt.two > fairHome.d, isTrue);
   });
 
   test('élő számláló', () {
-    final board = buildStrategy(
-      [
-        _m(id: '1', homeOdds: '1,40', awayOdds: '3,20', status: MatchStatus.live),
-        _m(id: '2', homeOdds: '1,40', awayOdds: '3,20'),
-      ],
-      (m) => StrengthModel.blend(m, empty),
-    );
+    final board = _board([
+      _twoWay(
+        id: '1',
+        homeOdds: Rational(BigInt.from(5), BigInt.from(4)),
+        awayOdds: Rational.fromInt(5),
+        status: MatchStatus.live,
+      ),
+      _twoWay(
+        id: '2',
+        homeOdds: Rational(BigInt.from(5), BigInt.from(4)),
+        awayOdds: Rational.fromInt(5),
+      ),
+    ]);
     expect(board.liveMatchCount, 1);
     expect(board.matchCount, 2);
   });

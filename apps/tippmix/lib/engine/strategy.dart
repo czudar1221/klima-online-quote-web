@@ -1,4 +1,5 @@
 import '../data/models.dart';
+import 'probability.dart';
 import 'rational.dart';
 import 'strength.dart';
 import 'strongest_pick.dart';
@@ -39,8 +40,10 @@ class StrategyBoard {
   StrategyPick? get bestSingle =>
       watchlist.isEmpty ? null : watchlist.first;
 
-  Rational get combinedChance =>
-      slip.fold(Rational.one, (a, p) => a * p.chance);
+  /// Product of de-vigged (blended) leg chances — exact, never a rounded %.
+  Rational get combinedChance => IndependentEvents(
+    [for (final p in slip) p.chance],
+  ).accumulator;
 
   Rational get combinedOdds =>
       slip.fold(Rational.one, (a, p) => a * p.odds);
@@ -50,8 +53,9 @@ class StrategyBoard {
   Rational get slipProfit => slipPayout - strategyStake;
 }
 
-/// Picks with P* > 50%, ranked by decimal odds (profit), not by %.
-/// Slip: greedy add while combined chance stays > 50%, at most 4 legs.
+/// Picks with exact P* > 1/2, ranked by decimal odds (profit), not by %.
+/// Filter and slip product compare [Rational] values — never [Rational.toPercentString]
+/// or [Rational.toDouble]. Slip: greedy add while the product stays > 1/2, at most 4 legs.
 StrategyBoard buildStrategy(
   List<SportsMatch> matches,
   BlendedMatch Function(SportsMatch) blend,
