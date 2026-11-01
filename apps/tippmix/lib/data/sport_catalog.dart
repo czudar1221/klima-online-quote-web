@@ -42,3 +42,30 @@ String sportFromOddsKey(String key) {
   if (key.startsWith('aussierules_')) return 'aussierules';
   return key.split('_').first;
 }
+
+/// Whitelist so one board refresh does not hit every Odds API league.
+const tippmixOddsSportKeys = <String>{
+  'soccer_epl',
+  'soccer_spain_la_liga',
+  'soccer_germany_bundesliga',
+  'soccer_italy_serie_a',
+  'soccer_france_ligue_one',
+  'soccer_netherlands_eredivisie',
+  'soccer_portugal_primeira_liga',
+  'soccer_uefa_champs_league',
+  'soccer_uefa_europa_league',
+  'soccer_uefa_europa_conference_league',
+  'basketball_nba',
+  'basketball_euroleague',
+  'icehockey_nhl',
+  'tennis_atp_singles',
+  'tennis_wta_singles',
+  'americanfootball_nfl',
+  'americanfootball_ncaaf',
+  'baseball_mlb',
+  'mma_mixed_martial_arts',
+  'boxing_boxing',
+  'handball_germany_bundesliga',
+};
+
+bool isTippmixOddsSport(String key) => tippmixOddsSportKeys.contains(key);

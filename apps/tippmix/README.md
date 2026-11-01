@@ -6,7 +6,7 @@ Magyar kereskedőasztal alsó menüvel: Mai szelvény, Figyelőlista, Forma, AI 
 
 1. Flutter + Android SDK, VS Code Flutter/Dart kiterjesztés.
 2. Nyisd meg `apps/tippmix/`. A repo gyökere a HVAC webes build — ne írd felül.
-3. Opcionális: `.env.example` → `.env`, `ODDS_API_KEY` (the-odds-api.com) a többi sporthoz.
+3. `.env.example` → `.env`. `OPENAI_API_KEY` a chathoz. `ODDS_API_KEY` (the-odds-api.com) az élő EU h2h szorzókhoz; a forma ESPN-ről jön. A `.env` gitignore-olt.
 
 ```bash
 cd apps/tippmix
@@ -20,8 +20,8 @@ Release APK: `flutter build apk --release --dart-define-from-file=.env` — a `.
 
 ## Élő adat
 
-- **Alap (kulcs nélkül):** ESPN nyilvános scoreboard JSON (nem HTML-scrapelés): labdarúgás, kosárlabda, jégkorong, amerikai foci, tenisz/baseball/MMA, ha van szorzó.
-- **Opcionális:** The Odds API (`ODDS_API_KEY`) — a forrás által listázott sportok h2h szorzói (tenisz, kézilabda, rögbi stb., ha aktív).
+- **Szorzó (kulccsal a telefonos APK-ban):** The Odds API EU h2h (Tippmix-szerű ligák: EPL, La Liga, NBA, NHL, NFL, ATP/WTA, MMA, kézilabda stb.).
+- **Forma / eredmény / hiányzó:** ESPN scoreboard JSON (nem HTML-scrapelés). A két forrás meccsnév szerint összefésül.
 - Hálózat nélkül: magyar hiba + Újra. Nincs minta-visszaállítás.
 - Nincs hivatalos Tippmix-feed. Nincs NB I az ESPN listáján.
 

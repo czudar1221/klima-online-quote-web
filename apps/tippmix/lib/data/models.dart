@@ -63,6 +63,53 @@ class SportsMatch {
     Outcome.away => awayOdds,
   };
 
+  SportsMatch copyWith({
+    String? id,
+    String? competition,
+    String? home,
+    String? away,
+    DateTime? kickoff,
+    MatchStatus? status,
+    int? minute,
+    int? homeScore,
+    int? awayScore,
+    Rational? homeOdds,
+    Rational? drawOdds,
+    Rational? awayOdds,
+    bool? isSample,
+    String? homeTeamId,
+    String? awayTeamId,
+    String? sport,
+    String? sportLabel,
+    String? leagueKey,
+    String? homeFormCode,
+    String? awayFormCode,
+    bool clearDrawOdds = false,
+  }) {
+    return SportsMatch(
+      id: id ?? this.id,
+      competition: competition ?? this.competition,
+      home: home ?? this.home,
+      away: away ?? this.away,
+      kickoff: kickoff ?? this.kickoff,
+      status: status ?? this.status,
+      minute: minute ?? this.minute,
+      homeScore: homeScore ?? this.homeScore,
+      awayScore: awayScore ?? this.awayScore,
+      homeOdds: homeOdds ?? this.homeOdds,
+      drawOdds: clearDrawOdds ? drawOdds : (drawOdds ?? this.drawOdds),
+      awayOdds: awayOdds ?? this.awayOdds,
+      isSample: isSample ?? this.isSample,
+      homeTeamId: homeTeamId ?? this.homeTeamId,
+      awayTeamId: awayTeamId ?? this.awayTeamId,
+      sport: sport ?? this.sport,
+      sportLabel: sportLabel ?? this.sportLabel,
+      leagueKey: leagueKey ?? this.leagueKey,
+      homeFormCode: homeFormCode ?? this.homeFormCode,
+      awayFormCode: awayFormCode ?? this.awayFormCode,
+    );
+  }
+
   MarketProbabilities get market => MarketProbabilities.fromDecimalOdds([
     homeOdds,
     if (drawOdds != null) drawOdds!,

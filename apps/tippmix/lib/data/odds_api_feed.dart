@@ -33,7 +33,7 @@ class OddsApiFeed {
       if (item is! Map<String, dynamic>) continue;
       if (item['active'] != true) continue;
       final key = item['key'] as String?;
-      if (key == null) continue;
+      if (key == null || !isTippmixOddsSport(key)) continue;
       keys.add(key);
     }
 
