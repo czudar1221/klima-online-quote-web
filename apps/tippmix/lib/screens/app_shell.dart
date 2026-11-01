@@ -5,6 +5,7 @@ import '../engine/strongest_pick.dart';
 import '../l10n/copy.dart';
 import '../state/app_controller.dart';
 import '../theme/app_theme.dart';
+import 'chance_charts.dart';
 import 'home_screen.dart';
 
 class AppShell extends StatefulWidget {
@@ -120,7 +121,11 @@ class _WatchPage extends StatelessWidget {
           ...board.watchlist.map(
             (p) => Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: WatchRow(pick: p, stake: board.stake),
+              child: WatchRow(
+                pick: p,
+                stake: board.stake,
+                snapshot: controller.patternFor(p.match),
+              ),
             ),
           ),
       ],
@@ -183,9 +188,17 @@ class _FormCard extends StatelessWidget {
               ),
               const SizedBox(height: 8),
               Text('${Copy.homeSide} · ${match.home}: ${snap.formLabel(true)}'),
+              FormSpark(
+                label: Copy.navForm,
+                form: snap.home?.recentForm ?? const [],
+              ),
               Text('${Copy.patternAbsence}: ${snap.absenceLabel(true)}'),
               const SizedBox(height: 6),
               Text('${Copy.awaySide} · ${match.away}: ${snap.formLabel(false)}'),
+              FormSpark(
+                label: Copy.navForm,
+                form: snap.away?.recentForm ?? const [],
+              ),
               Text('${Copy.patternAbsence}: ${snap.absenceLabel(false)}'),
             ],
           ),

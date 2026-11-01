@@ -34,6 +34,7 @@ class StrategyPick {
   final PatternSignal pattern;
   final String patternLine;
   final String aiNote;
+  final ThreeWay chances;
 
   const StrategyPick({
     required this.match,
@@ -44,6 +45,7 @@ class StrategyPick {
     this.pattern = PatternSignal.oddsOnly,
     this.patternLine = '',
     this.aiNote = '',
+    required this.chances,
   });
 
   StrategyPick copyWith({String? aiNote, String? patternLine}) => StrategyPick(
@@ -55,6 +57,7 @@ class StrategyPick {
     pattern: pattern,
     patternLine: patternLine ?? this.patternLine,
     aiNote: aiNote ?? this.aiNote,
+    chances: chances,
   );
 
   Rational payoutOn(Rational stake) => stake * odds;
@@ -166,6 +169,7 @@ StrategyBoard buildStrategy(
         modelChance: blended.model?[pick.outcome],
         pattern: blended.pattern,
         patternLine: patternLineOf(blended.pattern),
+        chances: blended.blended,
       ),
     );
   }

@@ -3,6 +3,7 @@ import 'package:tippmix_kalkulator/data/models.dart';
 import 'package:tippmix_kalkulator/data/pattern_book.dart';
 import 'package:tippmix_kalkulator/engine/rational.dart';
 import 'package:tippmix_kalkulator/engine/strategy.dart';
+import 'package:tippmix_kalkulator/engine/strength.dart';
 import 'package:tippmix_kalkulator/l10n/copy.dart';
 
 SportsMatch _m({
@@ -53,6 +54,11 @@ void main() {
       odds: Rational.fromInt(2),
       modelChance: Rational(BigInt.from(3), BigInt.from(5)),
       pattern: PatternSignal.form,
+      chances: ThreeWay(
+        home: Rational(BigInt.from(3), BigInt.from(5)),
+        draw: Rational.zero,
+        away: Rational(BigInt.from(2), BigInt.from(5)),
+      ),
     );
     expect(under.valueMark, ValueMark.underpriced);
     expect(under.valueLine.contains(Copy.valueUnder), isTrue);
@@ -64,6 +70,11 @@ void main() {
       odds: Rational.fromInt(2),
       modelChance: Rational(BigInt.from(2), BigInt.from(5)),
       pattern: PatternSignal.form,
+      chances: ThreeWay(
+        home: Rational(BigInt.from(2), BigInt.from(5)),
+        draw: Rational.zero,
+        away: Rational(BigInt.from(3), BigInt.from(5)),
+      ),
     );
     expect(over.valueMark, ValueMark.overpriced);
     expect(over.valueEdge, Rational(BigInt.from(-1), BigInt.from(5)));
@@ -84,6 +95,11 @@ void main() {
       outcome: Outcome.home,
       chance: Rational(BigInt.one, BigInt.two),
       odds: Rational.fromInt(2),
+      chances: ThreeWay(
+        home: Rational(BigInt.one, BigInt.two),
+        draw: Rational.zero,
+        away: Rational(BigInt.one, BigInt.two),
+      ),
     );
     expect(pick.valueMark, ValueMark.noModel);
     expect(pick.valueLine, Copy.valueNoModel);

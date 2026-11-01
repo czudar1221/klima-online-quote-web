@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../data/pattern_book.dart';
 import '../engine/rational.dart';
 import '../engine/strategy.dart';
 import '../engine/strongest_pick.dart';
 import '../l10n/copy.dart';
 import '../state/app_controller.dart';
 import '../theme/app_theme.dart';
+import 'chance_charts.dart';
 
 class SlipPage extends StatelessWidget {
   const SlipPage({super.key, required this.controller});
@@ -334,79 +336,97 @@ class OutcomeBadge extends StatelessWidget {
 }
 
 class WatchRow extends StatelessWidget {
-  const WatchRow({super.key, required this.pick, required this.stake});
+  const WatchRow({
+    super.key,
+    required this.pick,
+    required this.stake,
+    this.snapshot,
+  });
   final StrategyPick pick;
   final Rational stake;
+  final PatternSnapshot? snapshot;
 
   @override
   Widget build(BuildContext context) {
+    final snap = snapshot ?? PatternBook().snapshot(pick.match);
     return Card(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-        child: Row(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            OutcomeBadge(outcomeLabel(pick.outcome)),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    pick.match.sportLabel,
-                    style: const TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.azure,
-                    ),
-                  ),
-                  Text(
-                    '${pick.match.home} ${Copy.vs} ${pick.match.away}',
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w700,
-                      color: AppColors.navy,
-                    ),
-                  ),
-                  Text(
-                    pick.patternLine,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      color: AppColors.muted,
-                    ),
-                  ),
-                  Text(
-                    pick.valueLine,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.navy,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
+            Row(
               children: [
-                Text(
-                  '${Copy.modelChanceLabel} ${pick.chance.toPercentString()}',
-                  style: const TextStyle(fontSize: 12, color: AppColors.muted),
-                ),
-                Text(
-                  pick.odds.toDecimalString(),
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w800,
-                    color: AppColors.navy,
+                OutcomeBadge(outcomeLabel(pick.outcome)),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        pick.match.sportLabel,
+                        style: const TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.azure,
+                        ),
+                      ),
+                      Text(
+                        '${pick.match.home} ${Copy.vs} ${pick.match.away}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.navy,
+                        ),
+                      ),
+                      Text(
+                        pick.patternLine,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: AppColors.muted,
+                        ),
+                      ),
+                      Text(
+                        pick.valueLine,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.navy,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                Text(
-                  '+${formatHuf(pick.profitOn(stake))}',
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w600,
-                    color: Color(0xFF0F766E),
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text(
+                      '${Copy.modelChanceLabel} ${pick.chance.toPercentString()}',
+                      style: const TextStyle(fontSize: 12, color: AppColors.muted),
+                    ),
+                    Text(
+                      pick.odds.toDecimalString(),
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.navy,
+                      ),
+                    ),
+                    Text(
+                      '+${formatHuf(pick.profitOn(stake))}',
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                        color: Color(0xFF0F766E),
+                      ),
+                    ),
+                  ],
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+            MatchCharts(
+              chances: pick.chances,
+              hasDraw: pick.match.hasDraw,
+              snapshot: snap,
             ),
           ],
         ),
