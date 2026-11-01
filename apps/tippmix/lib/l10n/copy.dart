@@ -12,6 +12,7 @@ abstract final class Copy {
   static const outcomeAway = '2';
   static const live = 'Élő';
   static const retry = 'Újra';
+  static const loadingMatches = 'Meccsek betöltése…';
   static const vs = '–';
   static const minute = 'perc';
   static const stake = 'Tét';

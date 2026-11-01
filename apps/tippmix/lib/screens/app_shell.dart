@@ -7,6 +7,7 @@ import '../state/app_controller.dart';
 import '../theme/app_theme.dart';
 import 'chance_charts.dart';
 import 'home_screen.dart';
+import 'splash_screen.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key, required this.controller});
@@ -22,66 +23,67 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mist,
-      body: SafeArea(
-        child: AnimatedBuilder(
-          animation: widget.controller,
-          builder: (context, _) {
-            final c = widget.controller;
-            if (c.loading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (c.error != null) {
-              return BoardMessage(text: c.error!, onRetry: c.load);
-            }
-            if (c.matches.isEmpty && _index != 4) {
-              return BoardMessage(text: Copy.emptyMatches, onRetry: c.load);
-            }
-            return IndexedStack(
-              index: _index,
-              children: [
-                SlipPage(controller: c),
-                _WatchPage(controller: c),
-                _FormPage(controller: c),
-                _AiPage(controller: c),
-                _ChatPage(controller: c),
-              ],
-            );
-          },
-        ),
-      ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
-        destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.receipt_long_outlined),
-            selectedIcon: Icon(Icons.receipt_long),
-            label: Copy.bestSlip,
+    return AnimatedBuilder(
+      animation: widget.controller,
+      builder: (context, _) {
+        final c = widget.controller;
+        if (c.loading) {
+          return const Scaffold(
+            backgroundColor: AppColors.navyDeep,
+            body: SplashScreen(),
+          );
+        }
+        return Scaffold(
+          backgroundColor: AppColors.mist,
+          body: SafeArea(
+            child: c.error != null
+                ? BoardMessage(text: c.error!, onRetry: c.load)
+                : c.matches.isEmpty && _index != 4
+                ? BoardMessage(text: Copy.emptyMatches, onRetry: c.load)
+                : IndexedStack(
+                    index: _index,
+                    children: [
+                      SlipPage(controller: c),
+                      _WatchPage(controller: c),
+                      _FormPage(controller: c),
+                      _AiPage(controller: c),
+                      _ChatPage(controller: c),
+                    ],
+                  ),
           ),
-          NavigationDestination(
-            icon: Icon(Icons.list_outlined),
-            selectedIcon: Icon(Icons.list),
-            label: Copy.watchlist,
+          bottomNavigationBar: NavigationBar(
+            selectedIndex: _index,
+            onDestinationSelected: (i) => setState(() => _index = i),
+            destinations: const [
+              NavigationDestination(
+                icon: Icon(Icons.receipt_long_outlined),
+                selectedIcon: Icon(Icons.receipt_long),
+                label: Copy.bestSlip,
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.list_outlined),
+                selectedIcon: Icon(Icons.list),
+                label: Copy.watchlist,
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.timeline_outlined),
+                selectedIcon: Icon(Icons.timeline),
+                label: Copy.navForm,
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.auto_awesome_outlined),
+                selectedIcon: Icon(Icons.auto_awesome),
+                label: Copy.navAi,
+              ),
+              NavigationDestination(
+                icon: Icon(Icons.chat_bubble_outline),
+                selectedIcon: Icon(Icons.chat_bubble),
+                label: Copy.navChat,
+              ),
+            ],
           ),
-          NavigationDestination(
-            icon: Icon(Icons.timeline_outlined),
-            selectedIcon: Icon(Icons.timeline),
-            label: Copy.navForm,
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome),
-            label: Copy.navAi,
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.chat_bubble_outline),
-            selectedIcon: Icon(Icons.chat_bubble),
-            label: Copy.navChat,
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

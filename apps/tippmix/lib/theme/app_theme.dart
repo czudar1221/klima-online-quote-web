@@ -10,6 +10,7 @@ abstract final class AppColors {
   static const muted = Color(0xFF5C6B80);
   static const line = Color(0xFFE3EAF3);
   static const accentSoft = Color(0xFFE8F1FA);
+  static const rise = Color(0xFF22C55E);
 }
 
 class AppTheme {

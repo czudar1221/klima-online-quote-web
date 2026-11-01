@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -92,4 +94,36 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text(Copy.chatNeedKey), findsOneWidget);
   });
+
+  testWidgets('splash: logo és töltősáv amíg a meccsek jönnek', (tester) async {
+    await initializeDateFormatting('hu');
+    final feed = _GateFeed();
+    final controller = AppController(feed: feed);
+    final loading = controller.load();
+    await tester.pumpWidget(TippmixApp(controller: controller));
+    await tester.pump();
+    expect(find.byKey(const Key('tippmixLogo')), findsOneWidget);
+    expect(find.byKey(const Key('loadingBar')), findsOneWidget);
+    expect(find.text(Copy.loadingMatches), findsOneWidget);
+    expect(find.byType(LinearProgressIndicator), findsOneWidget);
+
+    feed.gate.complete();
+    await loading;
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('loadingBar')), findsNothing);
+    expect(find.text(Copy.bestSlip), findsWidgets);
+  });
+}
+
+class _GateFeed implements MatchFeed {
+  final Completer<void> gate = Completer<void>();
+
+  @override
+  Future<List<SportsMatch>> upcoming() async {
+    await gate.future;
+    return _FakeFeed().upcoming();
+  }
+
+  @override
+  Future<List<SportsMatch>> live() async => const [];
 }
