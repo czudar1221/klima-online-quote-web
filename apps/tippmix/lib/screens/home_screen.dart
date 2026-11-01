@@ -217,45 +217,7 @@ class SlipCard extends StatelessWidget {
           ...board.slip.map(
             (p) => Padding(
               padding: const EdgeInsets.only(bottom: 10),
-              child: Row(
-                children: [
-                  OutcomeBadge(outcomeLabel(p.outcome)),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '${p.match.home} ${Copy.vs} ${p.match.away}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        Text(
-                          '${p.patternLine} · ${p.valueLine}',
-                          style: const TextStyle(
-                            color: Colors.white60,
-                            fontSize: 11,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Text(
-                    p.chance.toPercentString(),
-                    style: const TextStyle(color: Colors.white70),
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    p.odds.toDecimalString(),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w800,
-                    ),
-                  ),
-                ],
-              ),
+              child: _SlipLegRow(pick: p),
             ),
           ),
           const Divider(color: Colors.white24),
@@ -335,7 +297,86 @@ class OutcomeBadge extends StatelessWidget {
   }
 }
 
-class WatchRow extends StatelessWidget {
+class _SlipLegRow extends StatefulWidget {
+  const _SlipLegRow({required this.pick});
+  final StrategyPick pick;
+
+  @override
+  State<_SlipLegRow> createState() => _SlipLegRowState();
+}
+
+class _SlipLegRowState extends State<_SlipLegRow> {
+  bool _open = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final pick = widget.pick;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        InkWell(
+          onTap: () => setState(() => _open = !_open),
+          child: Row(
+            children: [
+              OutcomeBadge(outcomeLabel(pick.outcome)),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${pick.match.home} ${Copy.vs} ${pick.match.away}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      _open
+                          ? '${pick.patternLine} · ${pick.valueLine}'
+                          : Copy.chartTap,
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Text(
+                pick.chance.toPercentString(),
+                style: const TextStyle(color: Colors.white70),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                pick.odds.toDecimalString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+              Icon(
+                _open ? Icons.expand_less : Icons.expand_more,
+                color: Colors.white70,
+                size: 22,
+              ),
+            ],
+          ),
+        ),
+        if (_open) ...[
+          const SizedBox(height: 8),
+          MatchCharts(
+            chances: pick.chances,
+            hasDraw: pick.match.hasDraw,
+            snapshot: PatternBook().snapshot(pick.match),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+class WatchRow extends StatefulWidget {
   const WatchRow({
     super.key,
     required this.pick,
@@ -347,88 +388,121 @@ class WatchRow extends StatelessWidget {
   final PatternSnapshot? snapshot;
 
   @override
+  State<WatchRow> createState() => _WatchRowState();
+}
+
+class _WatchRowState extends State<WatchRow> {
+  bool _open = false;
+
+  @override
   Widget build(BuildContext context) {
-    final snap = snapshot ?? PatternBook().snapshot(pick.match);
+    final pick = widget.pick;
+    final snap = widget.snapshot ?? PatternBook().snapshot(pick.match);
     return Card(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                OutcomeBadge(outcomeLabel(pick.outcome)),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: () => setState(() => _open = !_open),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  OutcomeBadge(outcomeLabel(pick.outcome)),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          pick.match.sportLabel,
+                          style: const TextStyle(
+                            fontSize: 11,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.azure,
+                          ),
+                        ),
+                        Text(
+                          '${pick.match.home} ${Copy.vs} ${pick.match.away}',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.navy,
+                          ),
+                        ),
+                        Text(
+                          pick.patternLine,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            color: AppColors.muted,
+                          ),
+                        ),
+                        Text(
+                          pick.valueLine,
+                          style: const TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.navy,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        pick.match.sportLabel,
-                        style: const TextStyle(
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.azure,
-                        ),
-                      ),
-                      Text(
-                        '${pick.match.home} ${Copy.vs} ${pick.match.away}',
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.navy,
-                        ),
-                      ),
-                      Text(
-                        pick.patternLine,
+                        '${Copy.modelChanceLabel} ${pick.chance.toPercentString()}',
                         style: const TextStyle(
                           fontSize: 12,
                           color: AppColors.muted,
                         ),
                       ),
                       Text(
-                        pick.valueLine,
+                        pick.odds.toDecimalString(),
+                        style: const TextStyle(
+                          fontWeight: FontWeight.w800,
+                          color: AppColors.navy,
+                        ),
+                      ),
+                      Text(
+                        '+${formatHuf(pick.profitOn(widget.stake))}',
                         style: const TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w600,
-                          color: AppColors.navy,
+                          color: Color(0xFF0F766E),
                         ),
                       ),
                     ],
                   ),
+                  Icon(
+                    _open ? Icons.expand_less : Icons.expand_more,
+                    color: AppColors.navy,
+                  ),
+                ],
+              ),
+              if (!_open)
+                const Padding(
+                  padding: EdgeInsets.only(top: 8),
+                  child: Text(
+                    Copy.chartTap,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.azure,
+                    ),
+                  ),
                 ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      '${Copy.modelChanceLabel} ${pick.chance.toPercentString()}',
-                      style: const TextStyle(fontSize: 12, color: AppColors.muted),
-                    ),
-                    Text(
-                      pick.odds.toDecimalString(),
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w800,
-                        color: AppColors.navy,
-                      ),
-                    ),
-                    Text(
-                      '+${formatHuf(pick.profitOn(stake))}',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF0F766E),
-                      ),
-                    ),
-                  ],
+              if (_open) ...[
+                const SizedBox(height: 10),
+                MatchCharts(
+                  chances: pick.chances,
+                  hasDraw: pick.match.hasDraw,
+                  snapshot: snap,
                 ),
               ],
-            ),
-            const SizedBox(height: 12),
-            MatchCharts(
-              chances: pick.chances,
-              hasDraw: pick.match.hasDraw,
-              snapshot: snap,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -49,6 +49,11 @@ abstract final class Copy {
       'Élő ESPN forma és csak a forrásban szereplő hiányzók. Ami nincs, azt jelezzük — nem találjuk ki.';
   static const eselyEngine = 'Esély (számítás)';
   static const modelChanceLabel = 'Modell esély';
+  static const chartTap = 'Koppints a 1/X/2 diagramhoz';
+  static const chartTitle = '1 / X / 2 diagram';
+  static const formWin = 'Gy';
+  static const formDraw = 'D';
+  static const formLoss = 'V';
   static const formulaChecked =
       'Az esélyt a képlet ellenőrizte (1/szorzó, árrés, keverék). Nem visszatesztelés.';
   static const homeSide = 'Hazai';

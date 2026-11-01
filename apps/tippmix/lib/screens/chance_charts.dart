@@ -28,15 +28,6 @@ class ChanceBars extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          Copy.modelChanceLabel,
-          style: TextStyle(
-            fontSize: 11,
-            fontWeight: FontWeight.w800,
-            color: AppColors.navy,
-          ),
-        ),
-        const SizedBox(height: 6),
         for (final row in rows)
           Padding(
             padding: const EdgeInsets.only(bottom: 6),
@@ -61,7 +52,7 @@ class ChanceBars extends StatelessWidget {
                         children: [
                           Container(color: AppColors.accentSoft),
                           FractionallySizedBox(
-                            widthFactor: _bar(row.p),
+                            widthFactor: barFactor(row.p),
                             child: Container(color: row.color),
                           ),
                         ],
@@ -88,13 +79,86 @@ class ChanceBars extends StatelessWidget {
       ],
     );
   }
+}
 
-  double _bar(Rational p) {
-    final v = p.toDouble();
-    if (v.isNaN || v.isInfinite) return 0;
-    if (v < 0) return 0;
-    if (v > 1) return 1;
-    return v;
+double barFactor(Rational p) {
+  final v = p.toDouble();
+  if (v.isNaN || v.isInfinite) return 0;
+  if (v < 0) return 0;
+  if (v > 1) return 1;
+  return v;
+}
+
+class ChanceColumnChart extends StatelessWidget {
+  const ChanceColumnChart({
+    super.key,
+    required this.chances,
+    required this.hasDraw,
+  });
+
+  final ThreeWay chances;
+  final bool hasDraw;
+
+  @override
+  Widget build(BuildContext context) {
+    final cols = <({String label, Rational p, Color color})>[
+      (label: Copy.outcomeHome, p: chances.home, color: AppColors.navy),
+      if (hasDraw)
+        (label: Copy.outcomeDraw, p: chances.draw, color: AppColors.azure),
+      (label: Copy.outcomeAway, p: chances.away, color: AppColors.navyDeep),
+    ];
+    return SizedBox(
+      height: 132,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (final col in cols)
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      col.p.toPercentString(),
+                      style: const TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.navy,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: FractionallySizedBox(
+                          heightFactor: barFactor(col.p).clamp(0.04, 1),
+                          widthFactor: 0.72,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color: col.color,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      col.label,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.w800,
+                        color: AppColors.navy,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
   }
 }
 
@@ -132,9 +196,9 @@ class FormSpark extends StatelessWidget {
 
   Widget _dot(FormResult r) {
     final letter = switch (r) {
-      FormResult.win => 'W',
-      FormResult.draw => 'D',
-      FormResult.loss => 'L',
+      FormResult.win => Copy.formWin,
+      FormResult.draw => Copy.formDraw,
+      FormResult.loss => Copy.formLoss,
     };
     final bg = switch (r) {
       FormResult.win => AppColors.navy,
@@ -143,7 +207,7 @@ class FormSpark extends StatelessWidget {
     };
     final fg = r == FormResult.loss ? AppColors.navy : Colors.white;
     return Container(
-      width: 18,
+      width: 22,
       height: 18,
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -155,7 +219,7 @@ class FormSpark extends StatelessWidget {
         letter,
         style: TextStyle(
           color: fg,
-          fontSize: 10,
+          fontSize: 9,
           fontWeight: FontWeight.w800,
         ),
       ),
@@ -177,19 +241,44 @@ class MatchCharts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        ChanceBars(chances: chances, hasDraw: hasDraw),
-        FormSpark(
-          label: '${Copy.homeSide} ${Copy.navForm}',
-          form: snapshot.home?.recentForm ?? const [],
-        ),
-        FormSpark(
-          label: '${Copy.awaySide} ${Copy.navForm}',
-          form: snapshot.away?.recentForm ?? const [],
-        ),
-      ],
+    final homeForm = snapshot.home?.recentForm ?? const [];
+    final awayForm = snapshot.away?.recentForm ?? const [];
+    return Container(
+      key: const Key('matchChart'),
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(12, 10, 12, 10),
+      decoration: BoxDecoration(
+        color: AppColors.mist,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: AppColors.line),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            Copy.chartTitle,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w800,
+              color: AppColors.navy,
+            ),
+          ),
+          const SizedBox(height: 8),
+          ChanceColumnChart(chances: chances, hasDraw: hasDraw),
+          const SizedBox(height: 10),
+          ChanceBars(chances: chances, hasDraw: hasDraw),
+          if (homeForm.isNotEmpty)
+            FormSpark(
+              label: '${Copy.homeSide} ${Copy.navForm}',
+              form: homeForm,
+            ),
+          if (awayForm.isNotEmpty)
+            FormSpark(
+              label: '${Copy.awaySide} ${Copy.navForm}',
+              form: awayForm,
+            ),
+        ],
+      ),
     );
   }
 }

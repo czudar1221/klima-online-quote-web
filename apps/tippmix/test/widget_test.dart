@@ -75,6 +75,14 @@ void main() {
     expect(find.text(Copy.notABet), findsOneWidget);
     expect(find.textContaining('Lakers'), findsWidgets);
     expect(find.textContaining(formatHuf(Rational.fromInt(8500))), findsWidgets);
+    expect(find.text(Copy.chartTitle), findsNothing);
+    expect(find.byKey(const Key('matchChart')), findsNothing);
+
+    await tester.tap(find.textContaining('Lakers'));
+    await tester.pumpAndSettle();
+    expect(find.text(Copy.chartTitle), findsOneWidget);
+    expect(find.byKey(const Key('matchChart')), findsOneWidget);
+    expect(find.text(Copy.outcomeHome), findsWidgets);
 
     await tester.tap(find.text(Copy.navChat));
     await tester.pumpAndSettle();
