@@ -7,6 +7,7 @@ import '../data/match_feed.dart';
 import '../data/models.dart';
 import '../data/squad.dart';
 import '../engine/rational.dart';
+import '../engine/strategy.dart';
 import '../engine/strength.dart';
 import '../engine/strongest_pick.dart';
 import '../l10n/copy.dart';
@@ -30,6 +31,8 @@ class AppController extends ChangeNotifier {
 
   StrongestPick pickFor(SportsMatch match) =>
       strongestPick(blendedFor(match), hasDraw: match.hasDraw);
+
+  StrategyBoard get board => buildStrategy(matches, blendedFor);
 
   String whyFor(SportsMatch match) {
     final pick = pickFor(match);

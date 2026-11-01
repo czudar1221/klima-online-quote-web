@@ -11,18 +11,30 @@ class _FakeFeed implements MatchFeed {
   @override
   Future<List<SportsMatch>> upcoming() async => [
     SportsMatch(
-      id: 'live-1',
-      competition: 'Premier League',
-      home: 'Liverpool',
-      away: 'Arsenal',
-      kickoff: DateTime(2026, 11, 1, 17, 30),
+      id: 'b1',
+      competition: 'NBA',
+      home: 'Celtics',
+      away: 'Nets',
+      kickoff: DateTime(2026, 11, 1, 1),
       status: MatchStatus.upcoming,
-      homeOdds: Rational.parseDecimal('2,20'),
-      drawOdds: Rational.parseDecimal('3,20'),
-      awayOdds: Rational.parseDecimal('3,40'),
+      homeOdds: Rational.parseDecimal('1,40'),
+      awayOdds: Rational.parseDecimal('3,20'),
       isSample: false,
-      sport: 'soccer',
-      sportLabel: 'Labdarúgás',
+      sport: 'basketball',
+      sportLabel: 'Kosárlabda',
+    ),
+    SportsMatch(
+      id: 'b2',
+      competition: 'NBA',
+      home: 'Lakers',
+      away: 'Suns',
+      kickoff: DateTime(2026, 11, 1, 2),
+      status: MatchStatus.live,
+      homeOdds: Rational.parseDecimal('1,85'),
+      awayOdds: Rational.parseDecimal('2,05'),
+      isSample: false,
+      sport: 'basketball',
+      sportLabel: 'Kosárlabda',
     ),
   ];
 
@@ -33,7 +45,9 @@ class _FakeFeed implements MatchFeed {
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('egy magyar lista: meccs, 1/X/2, tipp, esély', (tester) async {
+  testWidgets('stratégiai asztal: szelvény, figyelőlista, státusz', (
+    tester,
+  ) async {
     await initializeDateFormatting('hu');
     final controller = AppController(feed: _FakeFeed());
     await controller.load();
@@ -41,14 +55,11 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text(Copy.homeTitle), findsOneWidget);
-    expect(find.textContaining('Liverpool'), findsOneWidget);
-    expect(find.textContaining('Arsenal'), findsOneWidget);
-    expect(find.text(Copy.outcomeHome), findsWidgets);
-    expect(find.text(Copy.outcomeDraw), findsWidgets);
-    expect(find.text(Copy.outcomeAway), findsWidgets);
-    expect(find.textContaining(Copy.tipp), findsWidgets);
-    expect(find.text(Copy.eselyFromOdds), findsWidgets);
+    expect(find.text(Copy.bestSlip), findsOneWidget);
+    expect(find.text(Copy.watchlist), findsOneWidget);
+    expect(find.textContaining('2 meccs · 1 élő · 2 tipp 50% felett'), findsOneWidget);
+    expect(find.textContaining('Lakers'), findsWidgets);
+    expect(find.text(Copy.notABet), findsOneWidget);
     expect(find.text('Minta meccs'), findsNothing);
-    expect(find.text('You have pushed the button'), findsNothing);
   });
 }

@@ -1,9 +1,9 @@
 /// All user-facing strings. Hungarian only.
 abstract final class Copy {
-  static const appName = 'Tippmix kalkulátor';
-  static const homeTitle = 'Mai meccsek';
+  static const appName = 'Tippmix asztal';
+  static const homeTitle = 'Napi stratégia';
   static const homeHint =
-      'Élő internetes lista. A százalék esély a szorzóból — nem garancia.';
+      'Csak 50% feletti esély. Rangsor: nagyobb szorzó (több nyereség), nem a legnagyobb %.';
   static const esely = 'Esély';
   static const eselyFromOdds = 'Esély a szorzóból';
   static const tipp = 'Tipp';
@@ -14,9 +14,23 @@ abstract final class Copy {
   static const retry = 'Újra';
   static const vs = '–';
   static const minute = 'perc';
+  static const stake = 'Tét';
+  static const combinedOdds = 'Szelvény szorzó';
+  static const combinedChance = 'Együttes esély';
+  static const payout = 'Visszajáró';
+  static const profit = 'Nyereség';
+  static const bestSlip = 'Mai szelvény';
+  static const watchlist = 'Figyelőlista';
+  static const bestSingle = 'Legjobb egyes';
+  static const noStrategy =
+      'Most nincs 50% feletti esélyű kimenet a letöltött meccseken.';
+  static const independence =
+      'Az együttes esély a lábak szorzata, független meccseket feltételezve. Nem fogadás, csak számítás.';
+  static const notABet = 'Ez nem tipp leadása és nem garancia.';
+  static const retryLabel = 'Újra';
 
   static const disclaimer =
-      'Az esély a megadott szorzókból számolt, belsőleg konzisztens valószínűség. Nem jóslat és nem garancia. Szoros meccsen 45% is helyes lehet.';
+      'Az esély a szorzókból számolt, belsőleg konzisztens valószínűség. Nem jóslat, nem ügynökségi megbízás, nem valós tét.';
 
   static const errorNetwork =
       'Nem sikerült letölteni a meccseket. Ellenőrizd a netet, majd koppints az Újra gombra. Nincs mintaadat.';
@@ -28,4 +42,12 @@ abstract final class Copy {
   static const favoriteDraw = 'A számítás a döntetlent tartja a legerősebbnek.';
   static const favoriteAway =
       'A számítás a vendég győzelmet tartja a legerősebbnek.';
+
+  static String statusLine({
+    required int matches,
+    required int live,
+    required int tips,
+  }) {
+    return '$matches meccs · $live élő · $tips tipp 50% felett';
+  }
 }

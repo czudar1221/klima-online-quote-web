@@ -1,8 +1,6 @@
 # Tippmix kalkulátor
 
-Egy magyar képernyő: mai/élő meccsek, 1/X/2 (vagy 1/2), kiemelt tipp, **esély a szorzóból**. Nem garancia. Nincs mintaadat.
-
-A százalék a determinisztikus motorból jön (implikált valószínűség, árrés levétel). Szoros meccsen 45% is helyes.
+Magyar kereskedőasztal: mai szelvény (50%+ esély, szorzó szerint), 50 000 Ft tét/visszajáró/nyereség, alatta figyelőlista. **Esély a szorzóból**, nem garancia, nem valós tét. Nincs mintaadat.
 
 ## VS Code + Android
 

@@ -46,6 +46,12 @@ class SportsMatch {
 
   bool get hasDraw => drawOdds != null;
 
+  Rational oddsFor(Outcome o) => switch (o) {
+    Outcome.home => homeOdds,
+    Outcome.draw => drawOdds ?? Rational.one,
+    Outcome.away => awayOdds,
+  };
+
   MarketProbabilities get market => MarketProbabilities.fromDecimalOdds([
     homeOdds,
     if (drawOdds != null) drawOdds!,
