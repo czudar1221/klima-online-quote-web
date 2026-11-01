@@ -4,7 +4,7 @@ import 'package:intl/date_symbol_data_local.dart';
 
 import 'data/live_feed.dart';
 import 'l10n/copy.dart';
-import 'screens/home_screen.dart';
+import 'screens/app_shell.dart';
 import 'state/app_controller.dart';
 import 'theme/app_theme.dart';
 
@@ -34,7 +34,7 @@ class TippmixApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
-      home: HomeScreen(controller: controller),
+      home: AppShell(controller: controller),
     );
   }
 }

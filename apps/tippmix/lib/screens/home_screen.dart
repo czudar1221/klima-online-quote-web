@@ -8,136 +8,80 @@ import '../l10n/copy.dart';
 import '../state/app_controller.dart';
 import '../theme/app_theme.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key, required this.controller});
+class SlipPage extends StatelessWidget {
+  const SlipPage({super.key, required this.controller});
 
   final AppController controller;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.mist,
-      body: SafeArea(
-        child: AnimatedBuilder(
-          animation: controller,
-          builder: (context, _) {
-            if (controller.loading) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            if (controller.error != null) {
-              return _Message(
-                text: controller.error!,
-                onRetry: controller.load,
-              );
-            }
-            if (controller.matches.isEmpty) {
-              return _Message(
-                text: Copy.emptyMatches,
-                onRetry: controller.load,
-              );
-            }
-            final board = controller.board;
-            return RefreshIndicator(
-              onRefresh: controller.load,
-              child: ListView(
-                key: const Key('boardList'),
-                padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
-                children: [
-                  const Text(
-                    Copy.appName,
-                    style: TextStyle(
-                      color: AppColors.muted,
-                      letterSpacing: 1.2,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    Copy.homeTitle,
-                    style: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w800,
-                      color: AppColors.navy,
-                      letterSpacing: -0.6,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    Copy.statusLine(
-                      matches: board.matchCount,
-                      live: board.liveMatchCount,
-                      tips: board.watchlist.length,
-                    ),
-                    style: const TextStyle(
-                      color: AppColors.azure,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 6),
-                  const Text(
-                    Copy.homeHint,
-                    style: TextStyle(color: AppColors.muted, height: 1.4),
-                  ),
-                  const SizedBox(height: 16),
-                  _StakeCard(controller: controller),
-                  const SizedBox(height: 16),
-                  _SlipCard(board: board),
-                  const SizedBox(height: 20),
-                  const Text(
-                    Copy.watchlist,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w800,
-                      color: AppColors.navy,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  const Text(
-                    Copy.notABet,
-                    style: TextStyle(color: AppColors.muted, fontSize: 13),
-                  ),
-                  const SizedBox(height: 12),
-                  if (board.watchlist.isEmpty)
-                    const Text(
-                      Copy.noStrategy,
-                      style: TextStyle(color: AppColors.muted),
-                    )
-                  else
-                    ...board.watchlist.map(
-                      (p) => Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: _WatchRow(pick: p, stake: board.stake),
-                      ),
-                    ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    Copy.disclaimer,
-                    style: TextStyle(
-                      color: AppColors.muted,
-                      fontSize: 12,
-                      height: 1.4,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
+    final board = controller.board;
+    return RefreshIndicator(
+      onRefresh: controller.load,
+      child: ListView(
+        key: const Key('boardList'),
+        padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+        children: [
+          const Text(
+            Copy.appName,
+            style: TextStyle(
+              color: AppColors.muted,
+              letterSpacing: 1.2,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+          const SizedBox(height: 4),
+          const Text(
+            Copy.bestSlip,
+            style: TextStyle(
+              fontSize: 28,
+              fontWeight: FontWeight.w800,
+              color: AppColors.navy,
+              letterSpacing: -0.6,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            Copy.statusLine(
+              matches: board.matchCount,
+              live: board.liveMatchCount,
+              tips: board.watchlist.length,
+            ),
+            style: const TextStyle(
+              color: AppColors.azure,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Text(
+            Copy.homeHint,
+            style: TextStyle(color: AppColors.muted, height: 1.4),
+          ),
+          const SizedBox(height: 16),
+          StakeCard(controller: controller),
+          const SizedBox(height: 16),
+          SlipCard(board: board),
+          const SizedBox(height: 12),
+          const Text(
+            Copy.disclaimer,
+            style: TextStyle(color: AppColors.muted, fontSize: 12, height: 1.4),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _StakeCard extends StatefulWidget {
-  const _StakeCard({required this.controller});
+class StakeCard extends StatefulWidget {
+  const StakeCard({super.key, required this.controller});
   final AppController controller;
 
   @override
-  State<_StakeCard> createState() => _StakeCardState();
+  State<StakeCard> createState() => _StakeCardState();
 }
 
-class _StakeCardState extends State<_StakeCard> {
+class _StakeCardState extends State<StakeCard> {
   late final TextEditingController _text;
 
   @override
@@ -202,8 +146,8 @@ class _StakeCardState extends State<_StakeCard> {
   }
 }
 
-class _Message extends StatelessWidget {
-  const _Message({required this.text, required this.onRetry});
+class BoardMessage extends StatelessWidget {
+  const BoardMessage({super.key, required this.text, required this.onRetry});
   final String text;
   final Future<void> Function() onRetry;
 
@@ -227,8 +171,8 @@ class _Message extends StatelessWidget {
   }
 }
 
-class _SlipCard extends StatelessWidget {
-  const _SlipCard({required this.board});
+class SlipCard extends StatelessWidget {
+  const SlipCard({super.key, required this.board});
   final StrategyBoard board;
 
   @override
@@ -268,15 +212,27 @@ class _SlipCard extends StatelessWidget {
               padding: const EdgeInsets.only(bottom: 10),
               child: Row(
                 children: [
-                  _Badge(outcomeLabel(p.outcome)),
+                  OutcomeBadge(outcomeLabel(p.outcome)),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: Text(
-                      '${p.match.home} ${Copy.vs} ${p.match.away}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${p.match.home} ${Copy.vs} ${p.match.away}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        Text(
+                          p.patternLine,
+                          style: const TextStyle(
+                            color: Colors.white60,
+                            fontSize: 11,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                   Text(
@@ -341,8 +297,8 @@ class _SlipCard extends StatelessWidget {
   }
 }
 
-class _Badge extends StatelessWidget {
-  const _Badge(this.text);
+class OutcomeBadge extends StatelessWidget {
+  const OutcomeBadge(this.text, {super.key});
   final String text;
 
   @override
@@ -366,8 +322,8 @@ class _Badge extends StatelessWidget {
   }
 }
 
-class _WatchRow extends StatelessWidget {
-  const _WatchRow({required this.pick, required this.stake});
+class WatchRow extends StatelessWidget {
+  const WatchRow({super.key, required this.pick, required this.stake});
   final StrategyPick pick;
   final Rational stake;
 
@@ -378,7 +334,7 @@ class _WatchRow extends StatelessWidget {
         padding: const EdgeInsets.fromLTRB(14, 12, 14, 12),
         child: Row(
           children: [
-            _Badge(outcomeLabel(pick.outcome)),
+            OutcomeBadge(outcomeLabel(pick.outcome)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
@@ -397,6 +353,13 @@ class _WatchRow extends StatelessWidget {
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       color: AppColors.navy,
+                    ),
+                  ),
+                  Text(
+                    pick.patternLine,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: AppColors.muted,
                     ),
                   ),
                 ],

@@ -1,4 +1,5 @@
 import '../data/models.dart';
+import '../data/pattern_book.dart';
 import '../data/squad.dart';
 import 'probability.dart';
 import 'rational.dart';
@@ -24,9 +25,10 @@ import 'rational.dart';
 ///   P_model(H)=λ_H/Z, P_model(A)=λ_A/Z, P_model(D)=d/Z
 ///
 /// Blend with de-vigged odds (linear opinion pool):
-///   P* = (1−λ) P_fair + λ P_model,  λ = 2/5 if both squads exist else 0
+///   P* = (1−λ) P_fair + λ P_model,  λ = 2/5 if both teams have live form
+///   (or a real absence list on both sides) else 0. Never invent history.
 ///
-/// Displayed % uses P*. Not a guaranteed outcome.
+/// Displayed % uses P*. Not a guaranteed outcome. Pattern is not a win claim.
 abstract final class StrengthWeights {
   static final formAmplitude = Rational(BigInt.one, BigInt.from(5));
   static final modelBlend = Rational(BigInt.two, BigInt.from(5));
@@ -74,6 +76,7 @@ class BlendedMatch {
   final Rational modelWeight;
   final TeamProfile? homeProfile;
   final TeamProfile? awayProfile;
+  final PatternSignal pattern;
 
   const BlendedMatch({
     required this.market,
@@ -82,6 +85,7 @@ class BlendedMatch {
     required this.modelWeight,
     this.homeProfile,
     this.awayProfile,
+    this.pattern = PatternSignal.oddsOnly,
   });
 
   bool get usedSquads => model != null && modelWeight > Rational.zero;
@@ -178,6 +182,28 @@ abstract final class StrengthModel {
     );
   }
 
+  static ThreeWay modelTwoWay({
+    required TeamProfile home,
+    required TeamProfile away,
+  }) {
+    final h = effectiveRatings(home);
+    final a = effectiveRatings(away);
+    if (a.defense.isZero || h.defense.isZero) {
+      throw ArgumentError('defense rating must be positive');
+    }
+    final lambdaH = h.attack * StrengthWeights.homeAdvantage / a.defense;
+    final lambdaA = a.attack / h.defense;
+    final z = lambdaH + lambdaA;
+    if (z.isZero) {
+      throw ArgumentError('scoring rates are zero');
+    }
+    return ThreeWay(
+      home: lambdaH / z,
+      draw: Rational.zero,
+      away: lambdaA / z,
+    );
+  }
+
   static ThreeWay threeWayFromMarket(SportsMatch match) {
     final fair = match.market.fair;
     if (!match.hasDraw) {
@@ -219,6 +245,37 @@ abstract final class StrengthModel {
       modelWeight: lambda,
       homeProfile: home,
       awayProfile: away,
+      pattern: PatternSignal.form,
+    );
+  }
+
+  /// Live ESPN form / listed absences. λ = 2/5 only when [snap.canBlend].
+  static BlendedMatch blendSnapshot(SportsMatch match, PatternSnapshot snap) {
+    final marketP = match.market;
+    final market = threeWayFromMarket(match);
+    if (!snap.canBlend || snap.home == null || snap.away == null) {
+      return BlendedMatch(
+        market: marketP,
+        model: null,
+        blended: market,
+        modelWeight: Rational.zero,
+        homeProfile: snap.home,
+        awayProfile: snap.away,
+        pattern: PatternSignal.oddsOnly,
+      );
+    }
+    final model = match.hasDraw
+        ? model1x2(home: snap.home!, away: snap.away!)
+        : modelTwoWay(home: snap.home!, away: snap.away!);
+    final lambda = StrengthWeights.modelBlend;
+    return BlendedMatch(
+      market: marketP,
+      model: model,
+      blended: linearPool(market, model, lambda),
+      modelWeight: lambda,
+      homeProfile: snap.home,
+      awayProfile: snap.away,
+      pattern: snap.signal,
     );
   }
 }

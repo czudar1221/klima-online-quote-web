@@ -24,6 +24,30 @@ abstract final class Copy {
   static const profit = 'Nyereség';
   static const bestSlip = 'Mai szelvény';
   static const watchlist = 'Figyelőlista';
+  static const navForm = 'Forma';
+  static const navAi = 'AI jegyzet';
+  static const navChat = 'Chat';
+  static const chatTitle = 'Sportfogadási chat';
+  static const chatHint =
+      'Kérdezz a szelvényről, a listáról vagy a formáról. Az esélyt a számítás adja, a chat nem írja felül és nem fogad.';
+  static const chatSend = 'Küldés';
+  static const chatError =
+      'A beszélgetés most nem érhető el. Ellenőrizd a netet. A tábla ettől még számol.';
+  static const chatNeedKey =
+      'Nincs AI-kulcs. A tábla ettől még megy; a chat a beépített kulccsal működik a telefonon.';
+  static const patternOddsOnly = 'csak szorzó';
+  static const patternForm = 'forma';
+  static const patternAbsence = 'hiányzó';
+  static const patternFormAbsence = 'forma / hiányzó';
+  static const patternNoForm = 'Nincs formaadat a forrásban.';
+  static const patternNoAbsence = 'A forrás nem közölt hiányzót.';
+  static const patternNoListedAbsence = 'A forrás szerint most nincs jelzett hiányzó.';
+  static const aiFallback = 'csak szorzó és forma';
+  static const aiPageHint =
+      'Rövid piaci jegyzet. Az esély a tört-számítás, nem az AI. Nem garancia.';
+  static const formPageHint =
+      'Élő ESPN forma és csak a forrásban szereplő hiányzók. Ami nincs, azt jelezzük — nem találjuk ki.';
+  static const eselyEngine = 'Esély (számítás)';
   static const bestSingle = 'Legjobb egyes';
   static const noStrategy =
       'Most nincs 50% feletti esélyű kimenet a letöltött meccseken.';

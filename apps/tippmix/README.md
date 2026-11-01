@@ -1,6 +1,6 @@
 # Tippmix kalkulátor
 
-Magyar kereskedőasztal: mai szelvény (50%+ esély, szorzó szerint), szerkeszthető Ft tét (alap 50 000), visszajáró/nyereség, alatta figyelőlista. **Esély a szorzóból**, nem garancia, nem valós tét. Nincs mintaadat.
+Magyar kereskedőasztal alsó menüvel: Mai szelvény, Figyelőlista, Forma, AI jegyzet, Chat. Szerkeszthető Ft tét. **Esély a tört-számításból**, az AI nem írja felül. Nincs mintaadat.
 
 ## VS Code + Android
 
@@ -14,7 +14,9 @@ flutter pub get
 flutter run
 ```
 
-Kulccsal: `flutter run --dart-define-from-file=.env`
+Kulccsal (chat + AI jegyzet a telefonon is): `flutter run --dart-define-from-file=.env`
+
+Release APK: `flutter build apk --release --dart-define-from-file=.env` — a `.env` gitignore-olt, ne commitold.
 
 ## Élő adat
 

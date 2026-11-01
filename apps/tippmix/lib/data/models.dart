@@ -23,6 +23,9 @@ class SportsMatch {
   final String? awayTeamId;
   final String sport;
   final String sportLabel;
+  final String? leagueKey;
+  final String? homeFormCode;
+  final String? awayFormCode;
 
   const SportsMatch({
     required this.id,
@@ -42,6 +45,9 @@ class SportsMatch {
     this.awayTeamId,
     this.sport = 'soccer',
     this.sportLabel = 'Labdarúgás',
+    this.leagueKey,
+    this.homeFormCode,
+    this.awayFormCode,
   });
 
   bool get hasDraw => drawOdds != null;
@@ -76,6 +82,9 @@ class SportsMatch {
     'awayTeamId': awayTeamId,
     'sport': sport,
     'sportLabel': sportLabel,
+    'leagueKey': leagueKey,
+    'homeFormCode': homeFormCode,
+    'awayFormCode': awayFormCode,
   };
 
   factory SportsMatch.fromJson(Map<String, dynamic> json) {
@@ -99,6 +108,9 @@ class SportsMatch {
       awayTeamId: json['awayTeamId'] as String?,
       sport: json['sport'] as String? ?? 'soccer',
       sportLabel: json['sportLabel'] as String? ?? 'Labdarúgás',
+      leagueKey: json['leagueKey'] as String?,
+      homeFormCode: json['homeFormCode'] as String?,
+      awayFormCode: json['awayFormCode'] as String?,
     );
   }
 

@@ -56,8 +56,7 @@ void main() {
     await tester.pumpWidget(TippmixApp(controller: controller));
     await tester.pumpAndSettle();
 
-    expect(find.text(Copy.homeTitle), findsOneWidget);
-    expect(find.text(Copy.bestSlip), findsOneWidget);
+    expect(find.text(Copy.bestSlip), findsWidgets);
     expect(find.textContaining('2 meccs · 1 élő · 2 tipp 50% felett'), findsOneWidget);
     expect(find.byKey(const Key('stakeFt')), findsOneWidget);
     expect(controller.stake, defaultStrategyStake);
@@ -71,11 +70,18 @@ void main() {
       Rational.fromInt(8500),
     );
 
-    await tester.drag(find.byKey(const Key('boardList')), const Offset(0, -800));
+    await tester.tap(find.text(Copy.watchlist));
     await tester.pumpAndSettle();
-    expect(find.text(Copy.watchlist), findsOneWidget);
     expect(find.text(Copy.notABet), findsOneWidget);
     expect(find.textContaining('Lakers'), findsWidgets);
     expect(find.textContaining(formatHuf(Rational.fromInt(8500))), findsWidgets);
+
+    await tester.tap(find.text(Copy.navChat));
+    await tester.pumpAndSettle();
+    expect(find.text(Copy.chatTitle), findsWidgets);
+    await tester.enterText(find.byKey(const Key('chatInput')), 'Miért ez a szelvény?');
+    await tester.tap(find.text(Copy.chatSend));
+    await tester.pumpAndSettle();
+    expect(find.text(Copy.chatNeedKey), findsOneWidget);
   });
 }

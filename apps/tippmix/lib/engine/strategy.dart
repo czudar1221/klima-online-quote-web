@@ -1,4 +1,5 @@
 import '../data/models.dart';
+import '../data/pattern_book.dart';
 import 'probability.dart';
 import 'rational.dart';
 import 'strength.dart';
@@ -26,13 +27,29 @@ class StrategyPick {
   final Outcome outcome;
   final Rational chance;
   final Rational odds;
+  final PatternSignal pattern;
+  final String patternLine;
+  final String aiNote;
 
   const StrategyPick({
     required this.match,
     required this.outcome,
     required this.chance,
     required this.odds,
+    this.pattern = PatternSignal.oddsOnly,
+    this.patternLine = '',
+    this.aiNote = '',
   });
+
+  StrategyPick copyWith({String? aiNote, String? patternLine}) => StrategyPick(
+    match: match,
+    outcome: outcome,
+    chance: chance,
+    odds: odds,
+    pattern: pattern,
+    patternLine: patternLine ?? this.patternLine,
+    aiNote: aiNote ?? this.aiNote,
+  );
 
   Rational payoutOn(Rational stake) => stake * odds;
   Rational profitOn(Rational stake) => stake * (odds - Rational.one);
@@ -67,6 +84,18 @@ class StrategyBoard {
   Rational get slipPayout => stake * combinedOdds;
 
   Rational get slipProfit => slipPayout - stake;
+
+  StrategyBoard withNotes(Map<String, String> notes, {required String fallback}) {
+    StrategyPick tagged(StrategyPick p) =>
+        p.copyWith(aiNote: notes[p.match.id] ?? fallback);
+    return StrategyBoard(
+      watchlist: [for (final p in watchlist) tagged(p)],
+      slip: [for (final p in slip) tagged(p)],
+      stake: stake,
+      liveMatchCount: liveMatchCount,
+      matchCount: matchCount,
+    );
+  }
 }
 
 /// Picks with exact P* > 1/2, ranked by decimal odds (profit), not by %.
@@ -92,6 +121,8 @@ StrategyBoard buildStrategy(
         outcome: pick.outcome,
         chance: pick.chance,
         odds: match.oddsFor(pick.outcome),
+        pattern: blended.pattern,
+        patternLine: patternLineOf(blended.pattern),
       ),
     );
   }

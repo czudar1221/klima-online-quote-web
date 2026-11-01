@@ -4,6 +4,7 @@ import 'match_feed.dart';
 import 'models.dart';
 import 'odds_api_config.dart';
 import 'odds_api_feed.dart';
+import 'pattern_book.dart';
 
 /// Default live feed: ESPN scoreboards (no key) plus The Odds API when keyed.
 class LiveSportsFeed implements MatchFeed {
@@ -59,5 +60,16 @@ class LiveSportsFeed implements MatchFeed {
         return a.kickoff.compareTo(b.kickoff);
       });
     return list;
+  }
+
+  Future<({List<SportsMatch> matches, PatternBook patterns})> fetchBundle() async {
+    final matches = await fetch();
+    PatternBook patterns = PatternBook();
+    try {
+      patterns = await _espn.fetchPatterns(matches);
+    } catch (_) {
+      patterns = PatternBook();
+    }
+    return (matches: matches, patterns: patterns);
   }
 }
