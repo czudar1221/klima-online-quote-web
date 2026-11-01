@@ -52,6 +52,11 @@ class SportsMatch {
 
   bool get hasDraw => drawOdds != null;
 
+  bool get hasValidOdds =>
+      homeOdds > Rational.one &&
+      awayOdds > Rational.one &&
+      (drawOdds == null || drawOdds! > Rational.one);
+
   Rational oddsFor(Outcome o) => switch (o) {
     Outcome.home => homeOdds,
     Outcome.draw => drawOdds ?? Rational.one,

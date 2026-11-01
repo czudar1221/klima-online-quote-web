@@ -29,7 +29,7 @@ abstract final class Copy {
   static const navChat = 'Chat';
   static const chatTitle = 'Sportfogadási chat';
   static const chatHint =
-      'Kérdezz a szelvényről, a listáról vagy a formáról. Az esélyt a számítás adja, a chat nem írja felül és nem fogad.';
+      'Fejlesztői tanács a modellhez (forma, hiányzó, érték, tétméret). Az esélyt a tábla számolja, a chat nem fogad.';
   static const chatSend = 'Küldés';
   static const chatError =
       'A beszélgetés most nem érhető el. Ellenőrizd a netet. A tábla ettől még számol.';
@@ -48,6 +48,19 @@ abstract final class Copy {
   static const formPageHint =
       'Élő ESPN forma és csak a forrásban szereplő hiányzók. Ami nincs, azt jelezzük — nem találjuk ki.';
   static const eselyEngine = 'Esély (számítás)';
+  static const modelChanceLabel = 'Modell esély';
+  static const formulaChecked =
+      'Az esélyt a képlet ellenőrizte (1/szorzó, árrés, keverék). Nem visszatesztelés.';
+  static const homeSide = 'Hazai';
+  static const awaySide = 'Vendég';
+  static const modelChance = 'modell';
+  static const valueUnder = 'alulárazott';
+  static const valueOver = 'felülárazott';
+  static const valueFair = 'piaci ár';
+  static const valueNoModel = 'nincs modell-érték (csak szorzó)';
+  static const suggestedStake = 'Javasolt tét';
+  static const suggestedHint =
+      'A beírt összeg fél Kelly-aránya. Csökkenti a veszteséget, a szelvény esélye 50% felett marad. Nem garantált nyereség.';
   static const bestSingle = 'Legjobb egyes';
   static const noStrategy =
       'Most nincs 50% feletti esélyű kimenet a letöltött meccseken.';

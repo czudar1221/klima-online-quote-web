@@ -51,7 +51,7 @@ class LiveSportsFeed implements MatchFeed {
     if (merged.isEmpty && (espnError != null || oddsError != null)) {
       throw FeedException('network');
     }
-    final list = merged.values.toList()
+    final list = merged.values.where((m) => m.hasValidOdds && !m.isSample).toList()
       ..sort((a, b) {
         final live = (a.status == MatchStatus.live ? 0 : 1).compareTo(
           b.status == MatchStatus.live ? 0 : 1,

@@ -58,6 +58,11 @@ class SlipPage extends StatelessWidget {
             Copy.homeHint,
             style: TextStyle(color: AppColors.muted, height: 1.4),
           ),
+          const SizedBox(height: 4),
+          const Text(
+            Copy.formulaChecked,
+            style: TextStyle(color: AppColors.muted, height: 1.4, fontSize: 13),
+          ),
           const SizedBox(height: 16),
           StakeCard(controller: controller),
           const SizedBox(height: 16),
@@ -226,7 +231,7 @@ class SlipCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          p.patternLine,
+                          '${p.patternLine} · ${p.valueLine}',
                           style: const TextStyle(
                             color: Colors.white60,
                             fontSize: 11,
@@ -257,6 +262,12 @@ class SlipCard extends StatelessWidget {
           _kv(Copy.combinedChance, board.combinedChance.toPercentString()),
           _kv(Copy.payout, formatHuf(board.slipPayout)),
           _kv(Copy.profit, formatHuf(board.slipProfit), emphasize: true),
+          _kv(Copy.suggestedStake, formatHuf(board.suggestedStake)),
+          const SizedBox(height: 8),
+          const Text(
+            Copy.suggestedHint,
+            style: TextStyle(color: Colors.white60, fontSize: 12, height: 1.35),
+          ),
           const SizedBox(height: 8),
           const Text(
             Copy.independence,
@@ -362,6 +373,14 @@ class WatchRow extends StatelessWidget {
                       color: AppColors.muted,
                     ),
                   ),
+                  Text(
+                    pick.valueLine,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.navy,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -369,7 +388,7 @@ class WatchRow extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  '${Copy.esely} ${pick.chance.toPercentString()}',
+                  '${Copy.modelChanceLabel} ${pick.chance.toPercentString()}',
                   style: const TextStyle(fontSize: 12, color: AppColors.muted),
                 ),
                 Text(

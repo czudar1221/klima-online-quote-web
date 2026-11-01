@@ -108,6 +108,11 @@ class _WatchPage extends StatelessWidget {
           Copy.notABet,
           style: TextStyle(color: AppColors.muted, height: 1.4),
         ),
+        const SizedBox(height: 4),
+        const Text(
+          Copy.formulaChecked,
+          style: TextStyle(color: AppColors.muted, height: 1.4, fontSize: 13),
+        ),
         const SizedBox(height: 16),
         if (board.watchlist.isEmpty)
           const Text(Copy.noStrategy, style: TextStyle(color: AppColors.muted))
@@ -177,10 +182,10 @@ class _FormCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text('${match.home}: ${snap.formLabel(true)}'),
+              Text('${Copy.homeSide} · ${match.home}: ${snap.formLabel(true)}'),
               Text('${Copy.patternAbsence}: ${snap.absenceLabel(true)}'),
               const SizedBox(height: 6),
-              Text('${match.away}: ${snap.formLabel(false)}'),
+              Text('${Copy.awaySide} · ${match.away}: ${snap.formLabel(false)}'),
               Text('${Copy.patternAbsence}: ${snap.absenceLabel(false)}'),
             ],
           ),
@@ -235,7 +240,7 @@ class _AiPage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${Copy.eselyEngine}: ${p.chance.toPercentString()} · ${p.patternLine}',
+                        '${Copy.modelChanceLabel}: ${p.chance.toPercentString()} · ${p.valueLine} · ${p.patternLine}',
                         style: const TextStyle(color: AppColors.muted),
                       ),
                       const SizedBox(height: 6),

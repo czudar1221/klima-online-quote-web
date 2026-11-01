@@ -1,5 +1,6 @@
 import '../data/models.dart';
 import '../data/pattern_book.dart';
+import '../l10n/copy.dart';
 import 'probability.dart';
 import 'rational.dart';
 import 'strength.dart';
@@ -22,11 +23,14 @@ Rational? parseStakeHuf(String raw) {
   return Rational(n);
 }
 
+enum ValueMark { underpriced, overpriced, fair, noModel }
+
 class StrategyPick {
   final SportsMatch match;
   final Outcome outcome;
   final Rational chance;
   final Rational odds;
+  final Rational? modelChance;
   final PatternSignal pattern;
   final String patternLine;
   final String aiNote;
@@ -36,6 +40,7 @@ class StrategyPick {
     required this.outcome,
     required this.chance,
     required this.odds,
+    this.modelChance,
     this.pattern = PatternSignal.oddsOnly,
     this.patternLine = '',
     this.aiNote = '',
@@ -46,6 +51,7 @@ class StrategyPick {
     outcome: outcome,
     chance: chance,
     odds: odds,
+    modelChance: modelChance,
     pattern: pattern,
     patternLine: patternLine ?? this.patternLine,
     aiNote: aiNote ?? this.aiNote,
@@ -53,6 +59,34 @@ class StrategyPick {
 
   Rational payoutOn(Rational stake) => stake * odds;
   Rational profitOn(Rational stake) => stake * (odds - Rational.one);
+
+  /// P_model * odds − 1. Null if there is no live model.
+  Rational? get valueEdge {
+    final p = modelChance;
+    if (p == null) return null;
+    return p * odds - Rational.one;
+  }
+
+  ValueMark get valueMark {
+    final edge = valueEdge;
+    if (edge == null) return ValueMark.noModel;
+    if (edge > Rational.zero) return ValueMark.underpriced;
+    if (edge < Rational.zero) return ValueMark.overpriced;
+    return ValueMark.fair;
+  }
+
+  String get valueLine {
+    switch (valueMark) {
+      case ValueMark.noModel:
+        return Copy.valueNoModel;
+      case ValueMark.underpriced:
+        return '${Copy.valueUnder} · ${Copy.modelChance} ${modelChance!.toPercentString()}';
+      case ValueMark.overpriced:
+        return '${Copy.valueOver} · ${Copy.modelChance} ${modelChance!.toPercentString()}';
+      case ValueMark.fair:
+        return Copy.valueFair;
+    }
+  }
 }
 
 class StrategyBoard {
@@ -85,6 +119,14 @@ class StrategyBoard {
 
   Rational get slipProfit => slipPayout - stake;
 
+  /// Half-Kelly of the entered stake on the slip. Zero if no slip, chance
+  /// ≤ 50%, or no positive edge. Does not claim a guaranteed profit.
+  Rational get suggestedStake => halfKellyStake(
+    chance: combinedChance,
+    odds: combinedOdds,
+    bank: stake,
+  );
+
   StrategyBoard withNotes(Map<String, String> notes, {required String fallback}) {
     StrategyPick tagged(StrategyPick p) =>
         p.copyWith(aiNote: notes[p.match.id] ?? fallback);
@@ -111,7 +153,7 @@ StrategyBoard buildStrategy(
       : defaultStrategyStake;
   final candidates = <StrategyPick>[];
   for (final match in matches) {
-    if (match.isSample) continue;
+    if (match.isSample || !match.hasValidOdds) continue;
     final blended = blend(match);
     final pick = strongestPick(blended, hasDraw: match.hasDraw);
     if (pick.chance <= _half) continue;
@@ -121,6 +163,7 @@ StrategyBoard buildStrategy(
         outcome: pick.outcome,
         chance: pick.chance,
         odds: match.oddsFor(pick.outcome),
+        modelChance: blended.model?[pick.outcome],
         pattern: blended.pattern,
         patternLine: patternLineOf(blended.pattern),
       ),
@@ -149,6 +192,25 @@ StrategyBoard buildStrategy(
     liveMatchCount: matches.where((m) => m.status == MatchStatus.live).length,
     matchCount: matches.length,
   );
+}
+
+/// f* = (p·o − 1)/(o − 1), then half of that times [bank], clipped to [0, bank].
+/// Requires p > 1/2 so the slip rule stays intact; otherwise zero.
+Rational halfKellyStake({
+  required Rational chance,
+  required Rational odds,
+  required Rational bank,
+}) {
+  if (bank <= Rational.zero) return Rational.zero;
+  if (chance <= _half) return Rational.zero;
+  if (odds <= Rational.one) return Rational.zero;
+  final edge = chance * odds - Rational.one;
+  if (edge <= Rational.zero) return Rational.zero;
+  final kelly = edge / (odds - Rational.one);
+  var frac = kelly * _half;
+  if (frac <= Rational.zero) return Rational.zero;
+  if (frac > Rational.one) frac = Rational.one;
+  return bank * frac;
 }
 
 String formatHuf(Rational value) {

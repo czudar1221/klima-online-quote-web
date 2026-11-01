@@ -212,11 +212,17 @@ class AppController extends ChangeNotifier {
       ];
       final reply = await _openAi.complete(
         system:
-            'Magyar sportfogadási szakértő. A tábla élő számítását magyarázod: '
-            'szelvény, figyelőlista, forma, tét. Az esélyt NEM cseréled le, '
-            'új %-ot NEM találsz ki, tétet NEM adsz le. Ha valamire nincs adat, mondd meg.',
+            'Magyar fejlesztési tanácsadó a Tippmix kalkulátorhoz. Adj fejlesztői '
+            'stílusú tanácsot: forma-jellemzők, hiányzók, értékvonal (modell vs szorzó), '
+            'fél Kelly tétméret. Ne ajánlj új szelvényt a tábla helyett. Ne találj ki '
+            'új százalékot, ne adj le tétet, ne ígérj garantált nyerést.',
         messages: [
-          (role: 'user', content: 'Jelenlegi tábla:\n${boardContext()}'),
+          (
+            role: 'user',
+            content:
+                'A tábla már számolja a formát, az értéket és a javasolt tétet. '
+                'Kontextus:\n${boardContext()}',
+          ),
           ...history,
         ],
         maxTokens: 700,
